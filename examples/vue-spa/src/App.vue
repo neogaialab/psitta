@@ -1,7 +1,24 @@
 <script setup lang="ts">
-
+import { T, t } from "@psitta/vue";
+import { store } from "./main";
 </script>
 
 <template>
-  <div>hello</div>
+  <div>
+    {{ t('Hello, {name}') }}
+
+    <T text="Hello, {name}"></T>
+
+    <div class="menu">
+      <button @click="store.locale = 'pt'">Portuguese</button>
+      <button @click="store.locale = 'en'">English</button>
+    </div>
+  </div>
 </template>
+
+<style scoped>
+.menu {
+  display: flex;
+  gap: 0.25em;
+}
+</style>
