@@ -1,4 +1,9 @@
 {
   "extends": ["../../tsconfig.json"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "compilerOptions": {
+    "baseUrl": ".",
+    "declarationDir": "./dist"
+  },
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "include": ["./src/**/*"]
 }

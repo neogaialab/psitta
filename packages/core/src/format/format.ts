@@ -1,6 +1,5 @@
-import { i18nConfig } from '../config'
 import { DEFAULT_I18N_CONFIG, MESSAGE_PATTERN } from '../constants'
-import type { FormatCallback, FormatOptions, Text, Value, Values } from '../main'
+import { type FormatCallback, type FormatOptions, type Text, type Value, type Values, getConfig } from '../main'
 import { decline } from './decline'
 import interpolate from './interpolate'
 
@@ -29,13 +28,14 @@ function format<T>(
   initialValue: T,
   options?: FormatOptions,
 ) {
+  const config = getConfig()
   const datetimeFormat
     = options?.datetimeFormat
-    || i18nConfig.defaultDatetimeFormat
+    || config.defaultDatetimeFormat
     || DEFAULT_I18N_CONFIG.defaultDatetimeFormat
   const numberFormat
     = options?.numberFormat
-    || i18nConfig.defaultNumberFormat
+    || config.defaultNumberFormat
     || DEFAULT_I18N_CONFIG.defaultNumberFormat
 
   text = startEscaping(text)

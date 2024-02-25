@@ -1,10 +1,10 @@
-import { i18nConfig } from '../config'
-import type { Locale } from '../main'
+import { type Locale, getConfig } from '../main'
 
 function detectLocaleFromCookie(localeCookie: string | undefined) {
+  const config = getConfig()
   let locale: Locale | null
 
-  if (localeCookie && i18nConfig.locales?.includes(localeCookie))
+  if (localeCookie && config.locales?.includes(localeCookie))
     locale = localeCookie
   else
     locale = null

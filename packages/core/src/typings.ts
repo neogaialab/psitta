@@ -1,8 +1,8 @@
-export interface I18nConfig<T = I18n.MessageSchema> {
+export interface I18nConfig<T = Psitta.MessageSchema> {
   defaultLocale?: string
   fallbackLocale?: boolean
   locales?: Locale[]
-  translations?: T | I18n.MessageSchema
+  translations?: T | Psitta.MessageSchema
   numberDeclensionRules?: Record<Locale, NumberDeclensionRule>
   defaultNumberDeclensionRule: NumberDeclensionRule
   datetimeFormats?: Record<Locale, string>
@@ -11,7 +11,7 @@ export interface I18nConfig<T = I18n.MessageSchema> {
   defaultNumberFormat: string
 }
 
-export namespace I18n {
+export namespace Psitta {
   export interface MessageSchema extends Translations {}
 }
 

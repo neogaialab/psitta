@@ -1,5 +1,4 @@
-import { i18nConfig } from '../config'
-import { parseLocale } from '../utils'
+import { getConfig, parseLocale } from '../utils'
 
 function detectLocaleFromAcceptLanguage(acceptLanguageHeader: string) {
   const preferredLanguages = acceptLanguageHeader.split(',').map((lang) => {
@@ -9,10 +8,11 @@ function detectLocaleFromAcceptLanguage(acceptLanguageHeader: string) {
 
   preferredLanguages.sort((a, b) => b.priority - a.priority)
 
+  const config = getConfig()
   let lang
 
   for (const preferred of preferredLanguages) {
-    if (i18nConfig.locales?.includes(preferred.lang)) {
+    if (config.locales?.includes(preferred.lang)) {
       lang = preferred.lang
       break
     }

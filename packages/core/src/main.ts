@@ -14,8 +14,12 @@ export * from './localization/format'
 export { default as localizeKey } from './localization/localizeKey'
 export { default as localizeUrl } from './localization/localizeUrl'
 
-export * from './config'
+export { default as collect } from './translation/collect'
+export * from './translation/context'
+export * from './translation/utils'
+
 export * from './constants'
 export * from './utils'
+export { default as initPsitta } from './initPsitta'
 
 export * from './typings'

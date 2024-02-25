@@ -1,14 +1,14 @@
-import type { Locale } from '../main'
-import { i18nConfig } from '../config'
+import { type Locale, getConfig } from '../main'
 
 function detectLocaleFromPathname(pathname: string) {
+  const config = getConfig()
   const urlPaths = pathname.split('/')
   const firstPath = urlPaths[1]
 
   let urlWithoutLocale = pathname
   let locale: Locale | null
 
-  if (i18nConfig.locales?.includes(firstPath)) {
+  if (config.locales?.includes(firstPath)) {
     locale = firstPath
     urlWithoutLocale = `/${urlPaths.slice(2).join('/')}`
   }

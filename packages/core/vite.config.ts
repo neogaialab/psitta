@@ -11,5 +11,7 @@ export default defineConfig({
       fileName: format => `psitta.${format}.js`,
     },
   },
-  plugins: [dts()],
+  plugins: [dts({
+    insertTypesEntry: true,
+  })],
 })

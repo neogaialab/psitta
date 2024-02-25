@@ -21,8 +21,10 @@
     "noUnusedParameters": true,
 
     "declaration": true,
+    "declarationDir": "dist",
     "declarationMap": true,
     "noEmit": true,
+    "outDir": "dist",
     "sourceMap": true,
     "isolatedModules": true,
     "skipLibCheck": true,

@@ -28,9 +28,6 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
-  "dependencies": {
-    "@psitta/core": "workspace:^"
-  },
   "devDependencies": {
     "@antfu/eslint-config": "^2.6.4",
     "@types/node": "^20.11.20",
