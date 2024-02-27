@@ -1,26 +1,26 @@
-import type { I18nConfig, Locale } from '../main'
+import type { Config, Locale } from '../main'
 import { getConfig } from '../utils'
 
-export function getNumberDeclensionRule(locale: Locale, options?: I18nConfig) {
+export function getNumberDeclensionRule(locale: Locale, options?: Config) {
   const { numberDeclensionRules, defaultNumberDeclensionRule }
     = options || getConfig()
 
   return numberDeclensionRules?.[locale] || defaultNumberDeclensionRule
 }
 
-export function getDatetimeFormat(locale: Locale, options?: I18nConfig) {
+export function getDatetimeFormat(locale: Locale, options?: Config) {
   const { datetimeFormats, defaultDatetimeFormat } = options || getConfig()
 
   return datetimeFormats?.[locale] || defaultDatetimeFormat
 }
 
-export function getNumberFormat(locale: Locale, options?: I18nConfig) {
+export function getNumberFormat(locale: Locale, options?: Config) {
   const { datetimeFormats, defaultDatetimeFormat } = options || getConfig()
 
   return datetimeFormats?.[locale] || defaultDatetimeFormat
 }
 
-export function getFormatOptions(locale: Locale, options?: I18nConfig) {
+export function getFormatOptions(locale: Locale, options?: Config) {
   const numberDeclensionRule = getNumberDeclensionRule(locale, options)
   const datetimeFormat = getDatetimeFormat(locale, options)
   const numberFormat = getNumberFormat(locale, options)

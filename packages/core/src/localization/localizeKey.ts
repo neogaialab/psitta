@@ -1,18 +1,18 @@
-import type { I18nConfig, Key, Locale, Message } from '../main'
+import type { Config, Locale, Message, RegisteredMessages } from '../main'
 import { getConfig } from '../utils'
 
-function localizeKey(
-  key: Key,
+function localizeKey<T extends keyof RegisteredMessages>(
+  key: T,
   locale: Locale,
-  options?: I18nConfig,
+  options?: Config,
 ): Message {
   const { defaultLocale, translations, fallbackLocale }
     = options || getConfig()
 
   if (locale === defaultLocale)
-    return key
+    return key as unknown as Message
 
-  const messages = (translations as any)[key]
+  const messages = (translations as unknown)[key]
   const message = messages?.[locale]
 
   if (!messages || !message) {
@@ -24,7 +24,7 @@ function localizeKey(
       )
     }
 
-    return key
+    return key as unknown as Message
   }
 
   return message

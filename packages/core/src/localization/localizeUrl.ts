@@ -1,10 +1,10 @@
-import type { I18nConfig, Locale } from '../main'
+import type { Config, Locale } from '../main'
 import { getConfig } from '../utils'
 
 function localizeUrl(
   urlString?: string,
   locale?: Locale,
-  options?: Partial<I18nConfig>,
+  options?: Partial<Config>,
 ) {
   const { defaultLocale }
     = options || getConfig()

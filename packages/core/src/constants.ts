@@ -1,4 +1,4 @@
-import type { I18nConfig, NumberDeclensionRule } from './main'
+import type { Config, NumberDeclensionRule } from './main'
 
 export const MESSAGE_PATTERN = /{[^{}]+}\s?(?:\([^)]+\))?|[^{}]+/g
 
@@ -18,4 +18,4 @@ export const DEFAULT_I18N_CONFIG = {
   defaultNumberFormat: 'en-US',
   datetimeFormats: undefined,
   numberFormats: undefined,
-} satisfies I18nConfig
+} satisfies Config

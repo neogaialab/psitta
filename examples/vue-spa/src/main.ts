@@ -17,9 +17,9 @@ initPsitta({
   numberFormats: { en: 'en-US', pt: 'pt-BR' },
 })
 
-declare global {
-  namespace Psitta {
-    type MessageSchema = typeof translations
+declare module '@psitta/core' {
+  interface Register {
+    messages: typeof translations
   }
 }
 

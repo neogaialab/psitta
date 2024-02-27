@@ -1,7 +1,7 @@
 import { DEFAULT_I18N_CONFIG } from './constants'
-import type { I18nConfig, LocaleObject } from './main'
+import type { Config, LocaleObject } from './main'
 
-export function getConfig(): I18nConfig {
+export function getConfig(): Config {
   const i18nConfig = globalThis.__psitta || DEFAULT_I18N_CONFIG
   const defaultLocale = getDefaultLocale()
   const locales = i18nConfig.locales || DEFAULT_I18N_CONFIG.locales

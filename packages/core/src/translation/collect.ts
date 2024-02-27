@@ -1,7 +1,7 @@
-import type { Key, Values } from '../main'
+import type { RegisteredMessages, Values } from '../main'
 import { collection } from './context'
 
-function collect(key: Key, values?: Values) {
+function collect(key: keyof RegisteredMessages, values?: Values) {
   collection[key] = values || {}
 }
 

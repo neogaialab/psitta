@@ -1,8 +1,8 @@
-export interface I18nConfig<T = Psitta.MessageSchema> {
+export interface Config {
   defaultLocale?: string
   fallbackLocale?: boolean
   locales?: Locale[]
-  translations?: T | Psitta.MessageSchema
+  translations?: RegisteredMessages
   numberDeclensionRules?: Record<Locale, NumberDeclensionRule>
   defaultNumberDeclensionRule: NumberDeclensionRule
   datetimeFormats?: Record<Locale, string>
@@ -11,14 +11,19 @@ export interface I18nConfig<T = Psitta.MessageSchema> {
   defaultNumberFormat: string
 }
 
-export namespace Psitta {
-  export interface MessageSchema extends Translations {}
+export interface Register {}
+
+export type AnyMessages = Translations
+
+export type RegisteredMessages = Register extends {
+  messages: infer TMessages extends AnyMessages
 }
+  ? TMessages
+  : AnyMessages
 
 export type Locale = string
 export type Text = string
 export type Phrase = string
-export type Key = Text
 export type Message = string
 
 export type LocaleObject = {
@@ -27,7 +32,7 @@ export type LocaleObject = {
 }
 
 export type Translation = Record<Locale, Text>
-export type Translations = Record<Key, Translation>
+export type Translations = Record<Text, Translation>
 
 export type NumberDeclensionRule = (forms: string[], count: number) => number
 
