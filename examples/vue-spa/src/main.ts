@@ -6,7 +6,10 @@ import './style.css';
 
 const translations = {
   'Hello, {name}': {
-    pt: 'Olá, {name}'
+    pt: 'Olá, {name} {ptName}',
+  },
+  'Hi, {name} {lastName}': {
+    pt: 'Oi, {name} {lastName}',
   }
 } as const;
 

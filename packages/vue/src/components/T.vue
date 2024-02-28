@@ -1,34 +1,25 @@
 <script
   setup
   lang="ts"
-  generic="T extends Key & keyof Psitta.MessageSchema, V extends InferValues<T | EveryTranslationOf<T>>"
+  generic="T extends Register, K extends keyof T['messages'], V extends InferValues<K | E>, E extends T['messages'][K][keyof T['messages'][K]]"
 >
-import { computed, onMounted, useSlots } from 'vue'
+import type { FormatContext, InferValues, Register, Values } from '@psitta/core'
 import { collect, formatToSegments, getConfig, getFormatOptions, localizeKey } from '@psitta/core'
-import type { FormatContext, InferValues, Key, Psitta, Values } from '@psitta/core'
+import { computed, onMounted, useSlots } from 'vue'
 import useLocale from '../composables/useLocale'
-
-export type ValueOf<T> = T[keyof T]
-
-export type EveryTranslationOf<D extends string & keyof Psitta.MessageSchema> = Extract<
-  ValueOf<Psitta.MessageSchema[D]>,
-  string
->
 
 const props = withDefaults(
   defineProps<{
-    text: T
-    values?: Partial<V>
+    text: K
+    values?: V
     tag?: string
   }>(),
   { tag: 'span' },
 )
 
+type SlotProps = typeof props.values & { decline: FormatContext<any>['decline'] }
+type Slots = { [key in keyof V]: (slotProps: SlotProps) => any }
 defineSlots<Slots>()
-
-type Placeholders = InferValues<typeof props.text>
-type SlotProps = V & { decline: FormatContext<any>['decline'] }
-type Slots = Record<keyof Placeholders, (slotProps: SlotProps) => any>
 
 const slots = useSlots()
 
@@ -38,7 +29,7 @@ const locale = useLocale()
 
 const segments = computed(() => {
   const localeValue = locale.value
-  const text = localizeKey(props.text, localeValue, options)
+  const text = localizeKey(props.text as any, localeValue, options)
   const formatOptions = getFormatOptions(localeValue, options)
   const segments = formatToSegments(text, values, formatOptions)
 
@@ -47,7 +38,7 @@ const segments = computed(() => {
 
 onMounted(() => {
   if (import.meta.env.DEV)
-    collect(props.text, props.values as Values)
+    collect(props.text as any, props.values as Values)
 })
 </script>
 

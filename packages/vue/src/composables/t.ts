@@ -1,16 +1,16 @@
+import type { InferValues, Locale, RegisteredMessages, Values } from '@psitta/core'
 import { collect, formatToString, getConfig, getFormatOptions, localizeKey } from '@psitta/core'
-import type { InferValues, Key, Locale, Psitta, Values } from '@psitta/core'
-import useLocale from './useLocale'
 import { isServer } from '../utils'
+import useLocale from './useLocale'
 
 type ValueOf<T> = T[keyof T]
 
-type EveryTranslationOf<D extends string & keyof Psitta.MessageSchema> = Extract<
-  ValueOf<Psitta.MessageSchema[D]>,
+type EveryTranslationOf<D extends keyof RegisteredMessages> = Extract<
+  ValueOf<RegisteredMessages[D]>,
   string
 >
 
-function t<T extends Key & keyof Psitta.MessageSchema>(
+function t<T extends keyof RegisteredMessages>(
   key: T,
   values?: Partial<InferValues<T | EveryTranslationOf<T>>>,
   locale?: Locale,
