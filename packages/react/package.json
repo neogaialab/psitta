@@ -1,0 +1,52 @@
+{
+  "name": "@psitta/react",
+  "type": "module",
+  "version": "0.0.0",
+  "private": false,
+  "description": "The next-gen type-safe internationalization library powered by GenAI",
+  "keywords": [
+    "react"
+  ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/src/main.d.ts",
+        "default": "./dist/psitta-react.es.js"
+      },
+      "require": {
+        "types": "./dist/src/main.d.ts",
+        "default": "./dist/psitta-react.umd.js"
+      }
+    }
+  },
+  "main": "./dist/psitta-react.umd.js",
+  "module": "./dist/psitta-react.es.js",
+  "types": "./dist/src/main.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc & vite build",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "peerDependencies": {
+    "@psitta/core": "workspace:^",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.6.4",
+    "@types/node": "^20.11.20",
+    "@types/react": "^18.2.60",
+    "@types/react-dom": "^18.2.19",
+    "@vitejs/plugin-react": "^4.2.1",
+    "eslint": "^8.57.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.2.2",
+    "vite": "^5.1.4",
+    "vite-plugin-dts": "^3.7.3"
+  }
+}
