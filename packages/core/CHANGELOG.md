@@ -6,6 +6,8 @@ description: All notable changes to this project will be documented in this file
 
 ## [Unreleased]
 
+## [0.1.0] - 2024-03-16
+
 ### Added
 
 - Added support for interpolation, including date and number formatting using `Intl`
