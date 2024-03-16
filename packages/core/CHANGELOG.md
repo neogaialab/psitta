@@ -14,3 +14,5 @@ description: All notable changes to this project will be documented in this file
 - Added support for declension, particularly number declension
 - Added configuration and related utilities
 - Added locale detection, including URL pathname, cookies, `navigator.language` and `Accept-Language` HTTP header
+
+## 0.0.0

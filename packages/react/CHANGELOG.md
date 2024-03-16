@@ -12,3 +12,5 @@ description: All notable changes to this project will be documented in this file
 - Added `t()`
 - Added `useI18n`
 - Added `useLocale`
+
+## 0.0.0
