@@ -10,6 +10,7 @@ export default defineConfig({
       entry: path.resolve(__dirname, 'src/main.ts'),
       name: 'psitta-vue',
       fileName: format => `psitta-vue.${format}.js`,
+      formats: ['es'],
     },
     rollupOptions: {
       external: ['vue'],

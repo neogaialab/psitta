@@ -12,15 +12,10 @@
       "import": {
         "types": "./dist/src/main.d.ts",
         "default": "./dist/psitta-vue.es.js"
-      },
-      "require": {
-        "types": "./dist/src/main.d.ts",
-        "default": "./dist/psitta-vue.umkd.js"
       }
     }
   },
-  "main": "./dist/psitta-vue.umd.js",
-  "module": "./dist/psitta-vue.es.js",
+  "main": "./dist/psitta-vue.es.js",
   "types": "./dist/src/main.d.ts",
   "files": [
     "dist"

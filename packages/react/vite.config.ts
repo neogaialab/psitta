@@ -10,6 +10,7 @@ export default defineConfig({
       entry: path.resolve(__dirname, 'src/main.ts'),
       name: 'psitta-react',
       fileName: format => `psitta-react.${format}.js`,
+      formats: ['es'],
     },
     rollupOptions: {
       external: ['react', 'react-dom'],

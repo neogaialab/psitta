@@ -9,6 +9,7 @@ export default defineConfig({
       entry: path.resolve(__dirname, 'src/main.ts'),
       name: 'psitta',
       fileName: format => `psitta.${format}.js`,
+      formats: ['es'],
     },
   },
   plugins: [dts({

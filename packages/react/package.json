@@ -12,15 +12,10 @@
       "import": {
         "types": "./dist/src/main.d.ts",
         "default": "./dist/psitta-react.es.js"
-      },
-      "require": {
-        "types": "./dist/src/main.d.ts",
-        "default": "./dist/psitta-react.umd.js"
       }
     }
   },
-  "main": "./dist/psitta-react.umd.js",
-  "module": "./dist/psitta-react.es.js",
+  "main": "./dist/psitta-react.es.js",
   "types": "./dist/src/main.d.ts",
   "files": [
     "dist"
