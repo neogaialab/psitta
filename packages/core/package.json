@@ -29,6 +29,7 @@
   "main": "./dist/psitta.es.js",
   "types": "./dist/src/main.d.ts",
   "files": [
+    "CHANGELOG.md",
     "dist"
   ],
   "scripts": {

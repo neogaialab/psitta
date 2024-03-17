@@ -5,18 +5,12 @@
   "scripts": {
     "dev": "pnpm --recursive --parallel --stream run dev",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "release:prepare": "bun ./scripts/prepare-release.ts"
+    "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.6.4",
-    "@types/fs-extra": "^11.0.4",
     "@types/node": "^20.11.20",
     "eslint": "^8.57.0",
-    "find-up": "^7.0.0",
-    "fs-extra": "^11.2.0",
-    "rimraf": "^5.0.5",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.2.2"
+    "rimraf": "^5.0.5"
   }
 }
