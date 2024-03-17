@@ -23,4 +23,4 @@ description: All notable changes to this project will be documented in this file
 
 **Note**: This release was yanked due to missing files. Please refer to version 0.1.2 for the latest changes.
 
-## 0.0.0
+## [0.0.0]
