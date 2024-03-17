@@ -4,7 +4,7 @@ name: Changelog
 description: All notable changes to this project will be documented in this file.
 ---
 
-## [Unreleased]
+## [0.1.2] - 2024-03-17
 
 ### Added
 
