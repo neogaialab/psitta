@@ -10,7 +10,6 @@
   "plugins": {
     "@release-it/keep-a-changelog": {
       "addUnreleased": true,
-      "strictLatest": false,
       "filename": "CHANGELOG.md"
     }
   },
