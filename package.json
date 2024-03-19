@@ -5,12 +5,16 @@
   "scripts": {
     "dev": "pnpm --recursive --parallel --stream run dev",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.6.4",
     "@types/node": "^20.11.20",
     "eslint": "^8.57.0",
-    "rimraf": "^5.0.5"
+    "rimraf": "^5.0.5",
+    "vitepress": "1.0.0-rc.45"
   }
 }
