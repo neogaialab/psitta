@@ -1,3 +1,5 @@
+import { RelativeTime } from "./utils"
+
 export interface Config {
   defaultLocale?: string
   fallbackLocale?: boolean
@@ -5,13 +7,11 @@ export interface Config {
   translations?: RegisteredMessages
   numberDeclensionRules?: Record<Locale, NumberDeclensionRule>
   defaultNumberDeclensionRule: NumberDeclensionRule
-  datetimeFormats?: Record<Locale, string>
-  defaultDatetimeFormat: string
-  numberFormats?: Record<Locale, string>
-  defaultNumberFormat: string
+  valueLocales?: Record<Locale, string>
+  defaultValueLocale: string
 }
 
-export interface Register {}
+export interface Register { }
 
 export type AnyMessages = Translations
 
@@ -36,33 +36,59 @@ export type Translations = Record<Text, Translation>
 
 export type NumberDeclensionRule = (forms: string[], count: number) => number
 
-export type DateObject = {
-  date: Date
-} & Intl.DateTimeFormatOptions
+export type Value = string | number | boolean | null | undefined | Date | RelativeTime | Iterable<string>
 
-export type NumberObject = {
-  number: number
-} & Intl.NumberFormatOptions
+export type AnyFormatOptions = Record<string, unknown>
 
-export type Value = string | number | Date | DateObject | NumberObject
-export type Values = Record<Placeholder, Value>
+export type RegisteredFormatOptions = Register extends {
+  formatOptions: infer T extends AnyFormatOptions
+}
+  ? T
+  : AnyFormatOptions
+
+export type InferFormatOptions<V> = V extends number
+  ? Intl.NumberFormatOptions
+  : V extends Date
+  ? Intl.DateTimeFormatOptions
+  : V extends RelativeTime
+  ? Intl.RelativeTimeFormatOptions
+  : V extends string
+  ? unknown
+  : V extends Iterable<string>
+  ? Intl.ListFormatOptions
+  : never
+
+export type CustomFormatOptions<V> = {
+  custom?: (value: V, locale: Locale, options: ValueFormatOptions<V>) => string
+}
+
+export type ValueFormatOptions<V> = Intl.NumberFormatOptions
+  & Intl.RelativeTimeFormatOptions
+  & Intl.DateTimeFormatOptions
+  & Intl.ListFormatOptions
+  & CustomFormatOptions<V>
+  & RegisteredFormatOptions
+
+export type ValueWithOptions<V> = [V, (InferFormatOptions<V> & CustomFormatOptions<V> & RegisteredFormatOptions)?]
+
+export type Values<V = any> = Record<Placeholder, Value | ValueWithOptions<V>>
 
 export type Placeholder = string
 
 export type InferValues<
-  S extends Text,
+  T extends Text,
   // eslint-disable-next-line
-  P extends Values = {},
+  P = {},
+  V = unknown
   // @ts-expect-error
-  // eslint-disable-next-line
-> = S extends `${infer Text}{${infer Var}}${infer Rest}`
-  ? InferValues<Rest, P & { [K in Var]: Value }>
+  // eslint-disable-next-line,
+> = T extends `${infer Text}{${infer Var}}${infer Rest}`
+  ? InferValues<Rest, P & { [K in Var]: Value | ValueWithOptions<V> }>
   : P
 
 export interface FormatOptions {
   numberDeclensionRule?: NumberDeclensionRule
-  datetimeFormat?: string
-  numberFormat?: string
+  valueLocale?: string
 }
 
 export type FormatFunction<O> = (
@@ -94,6 +120,12 @@ export type Segment<P extends Values, V> = {
   decline: DeclineFunction
 }
 
-export interface InterpolateOptions { datetimeFormat: string, numberFormat: string }
+export interface InterpolateOptions {
+  valueLocale: string
+}
 
-export {}
+export function defineValue<V>(value: V | ValueWithOptions<V>) {
+  return value
+}
+
+export { }

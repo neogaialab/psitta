@@ -4,6 +4,19 @@ name: Changelog
 description: All notable changes to this project will be documented in this file.
 ---
 
+## [Unreleased]
+
+## Added
+
+- Added `localizeValue()`
+
+## Changed
+
+- Renamed `localizeKey()` to `localizeMessage()`
+- Improved types, especially (`getDefaultLocale()`)
+- Improved `getConfig()` - `defaultLocale` should always return type string
+- Simplified localization options/config
+
 ## [0.1.2] - 2024-03-17
 
 ### Added

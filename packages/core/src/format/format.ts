@@ -1,9 +1,9 @@
 import { DEFAULT_I18N_CONFIG, MESSAGE_PATTERN } from '../constants'
-import { type FormatCallback, type FormatOptions, type Text, type Value, type Values, getConfig } from '../main'
+import { Values, getConfig, type FormatCallback, type FormatOptions, type Text, type Value, InterpolateOptions } from '../main'
 import { decline } from './decline'
 import interpolate from './interpolate'
 
-function startEscaping(text: Text) {
+function startEscaping(text: string) {
   return (text = text
     .replaceAll('\\{', '__CURLY_OPEN')
     .replaceAll('\\}', '__CURLY_CLOSE')
@@ -12,7 +12,7 @@ function startEscaping(text: Text) {
     .replaceAll('\\)', '__PARENTHESES_CLOSE'))
 }
 
-function endEscaping(text: Text) {
+function endEscaping(text: string) {
   return (text = text
     .replaceAll('__CURLY_OPEN', '{')
     .replaceAll('__CURLY_CLOSE', '}')
@@ -21,22 +21,18 @@ function endEscaping(text: Text) {
     .replaceAll('__PARENTHESES_CLOSE', ')'))
 }
 
-function format<T>(
+function format<I, V>(
   text: Text,
-  values: Partial<Values> = {},
-  callbackFn: FormatCallback<T>,
-  initialValue: T,
+  values: Partial<Values<V>> = {},
+  callbackFn: FormatCallback<I>,
+  initialValue: I,
   options?: FormatOptions,
 ) {
   const config = getConfig()
-  const datetimeFormat
-    = options?.datetimeFormat
-    || config.defaultDatetimeFormat
-    || DEFAULT_I18N_CONFIG.defaultDatetimeFormat
-  const numberFormat
-    = options?.numberFormat
-    || config.defaultNumberFormat
-    || DEFAULT_I18N_CONFIG.defaultNumberFormat
+  const valueLocale
+    = options?.valueLocale
+    || config.defaultValueLocale
+    || DEFAULT_I18N_CONFIG.defaultValueLocale
 
   text = startEscaping(text)
 
@@ -63,7 +59,9 @@ function format<T>(
       const phrase = part
       const declension = decline(phrase, value, declineOptions)
 
-      const interpolateOptions = { datetimeFormat, numberFormat }
+      const interpolateOptions: InterpolateOptions = {
+        valueLocale,
+      }
       part = interpolate(declension.phrase, key, value, interpolateOptions)
 
       part = endEscaping(part)

@@ -14,8 +14,6 @@ export const DEFAULT_I18N_CONFIG = {
   defaultLocale: 'en',
   fallbackLocale: true,
   defaultNumberDeclensionRule: DEFAULT_NUMBER_DECLENSION_RULE,
-  defaultDatetimeFormat: 'en-US',
-  defaultNumberFormat: 'en-US',
-  datetimeFormats: undefined,
-  numberFormats: undefined,
+  valueLocales: undefined,
+  defaultValueLocale: 'en-US',
 } satisfies Config

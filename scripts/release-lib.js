@@ -46,7 +46,7 @@ export function packageJson(options) {
   }
 
   const publish = () => {
-    execSync(`${packageManager} publish`)
+    execSync(`${packageManager} publish --no-git-checks`)
   }
 
   const getPublishUrl = () => {
