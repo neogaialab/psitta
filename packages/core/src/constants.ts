@@ -9,11 +9,12 @@ export const DEFAULT_NUMBER_DECLENSION_RULE: NumberDeclensionRule = (
   return count === 1 ? 0 : forms.length - 1
 }
 
-export const DEFAULT_I18N_CONFIG = {
-  locales: ['en'],
+export const DEFAULT_I18N_CONFIG: Config = {
+  locales: ['en', 'sp'],
   defaultLocale: 'en',
-  fallbackLocale: true,
+  fallback: true,
   defaultNumberDeclensionRule: DEFAULT_NUMBER_DECLENSION_RULE,
-  valueLocales: undefined,
-  defaultValueLocale: 'en-US',
-} satisfies Config
+  valueLocales: { en: 'en-US', sp: 'sp-SP' },
+  defaultValueLocale: 'en',
+  messages: {},
+}

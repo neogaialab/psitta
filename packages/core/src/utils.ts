@@ -6,33 +6,17 @@ export class RelativeTime {
 }
 
 export function getConfig(): Config {
-  const config: Config = (globalThis.__psitta || DEFAULT_I18N_CONFIG)
-  const defaultLocale = getDefaultLocale()
-  const locales = config.locales || DEFAULT_I18N_CONFIG.locales
-
-  const translations = config.translations || {}
-  const fallbackLocale = config.fallbackLocale || DEFAULT_I18N_CONFIG.fallbackLocale
-
-  const valueLocales = config.valueLocales || DEFAULT_I18N_CONFIG.valueLocales
-  const defaultValueLocale = config.defaultValueLocale || DEFAULT_I18N_CONFIG.defaultValueLocale
-  const defaultNumberDeclensionRule = config.defaultNumberDeclensionRule || DEFAULT_I18N_CONFIG.defaultNumberDeclensionRule
-  const numberDeclensionRules = config.numberDeclensionRules
-
-  return {
-    translations,
-    fallbackLocale,
-    locales,
-    defaultLocale,
-    defaultNumberDeclensionRule,
-    numberDeclensionRules,
-    valueLocales,
-    defaultValueLocale,
+  const config = {
+    ...DEFAULT_I18N_CONFIG,
+    ...globalThis.__psitta,
   }
+
+  return config
 }
 
 export function getDefaultLocale() {
-  const i18nConfig: Config = globalThis.__psitta || DEFAULT_I18N_CONFIG
-  return i18nConfig.defaultLocale || DEFAULT_I18N_CONFIG.defaultLocale
+  const config = globalThis.__psitta
+  return config.defaultLocale || DEFAULT_I18N_CONFIG.defaultLocale
 }
 
 export function stringifyLocale(locale: LocaleObject) {

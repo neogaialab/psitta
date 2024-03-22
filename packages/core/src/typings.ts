@@ -2,9 +2,9 @@ import { RelativeTime } from "./utils"
 
 export interface Config {
   defaultLocale?: string
-  fallbackLocale?: boolean
+  fallback?: boolean
   locales?: Locale[]
-  translations?: RegisteredMessages
+  messages?: RegisteredMessages
   numberDeclensionRules?: Record<Locale, NumberDeclensionRule>
   defaultNumberDeclensionRule: NumberDeclensionRule
   valueLocales?: Record<Locale, string>
@@ -13,7 +13,7 @@ export interface Config {
 
 export interface Register { }
 
-export type AnyMessages = Translations
+export type AnyMessages = Messages
 
 export type RegisteredMessages = Register extends {
   messages: infer TMessages extends AnyMessages
@@ -31,8 +31,9 @@ export type LocaleObject = {
   region?: string
 }
 
-export type Translation = Record<Locale, Text>
-export type Translations = Record<Text, Translation>
+export type Translation = Text
+export type Translations = Record<Locale, Translation>
+export type Messages = Record<Text, Translations>
 
 export type NumberDeclensionRule = (forms: string[], count: number) => number
 
