@@ -6,10 +6,7 @@ function localizeMessage<T extends keyof RegisteredMessages>(
   locale: Locale,
   options?: Partial<Config>,
 ): Message {
-  const { defaultLocale, messages, fallback } = {
-    ...getConfig(),
-    ...options
-  }
+  const { defaultLocale, messages, fallback } = getConfig(options)
 
   if (locale === defaultLocale)
     return message as unknown as Message

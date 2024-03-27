@@ -1,13 +1,14 @@
+import { FormatOptions } from "./main"
 import { RelativeTime } from "./utils"
 
 export interface Config {
-  defaultLocale?: string
-  fallback?: boolean
-  locales?: Locale[]
-  messages?: RegisteredMessages
-  numberDeclensionRules?: Record<Locale, NumberDeclensionRule>
+  defaultLocale: string
+  fallback: boolean
+  locales: Locale[]
+  messages: RegisteredMessages
+  numberDeclensionRules: Record<Locale, NumberDeclensionRule>
   defaultNumberDeclensionRule: NumberDeclensionRule
-  valueLocales?: Record<Locale, string>
+  valueLocales: Record<Locale, string>
   defaultValueLocale: string
 }
 
@@ -86,11 +87,6 @@ export type InferValues<
 > = T extends `${infer Text}{${infer Var}}${infer Rest}`
   ? InferValues<Rest, P & { [K in Var]: Value | ValueWithOptions<V> }>
   : P
-
-export interface FormatOptions {
-  numberDeclensionRule?: NumberDeclensionRule
-  valueLocale?: string
-}
 
 export type FormatFunction<O> = (
   text: Text,

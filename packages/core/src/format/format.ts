@@ -1,5 +1,5 @@
-import { DEFAULT_I18N_CONFIG, MESSAGE_PATTERN } from '../constants'
-import { Values, getConfig, type FormatCallback, type FormatOptions, type Text, type Value, InterpolateOptions } from '../main'
+import { MESSAGE_PATTERN } from '../constants'
+import { InterpolateOptions, NumberDeclensionRule, Values, getConfig, type FormatCallback, type Text, type Value } from '../main'
 import { decline } from './decline'
 import interpolate from './interpolate'
 
@@ -21,6 +21,11 @@ function endEscaping(text: string) {
     .replaceAll('__PARENTHESES_CLOSE', ')'))
 }
 
+export interface FormatOptions {
+  numberDeclensionRule?: NumberDeclensionRule
+  valueLocale?: string
+}
+
 function format<I, V>(
   text: Text,
   values: Partial<Values<V>> = {},
@@ -29,10 +34,7 @@ function format<I, V>(
   options?: FormatOptions,
 ) {
   const config = getConfig()
-  const valueLocale
-    = options?.valueLocale
-    || config.defaultValueLocale
-    || DEFAULT_I18N_CONFIG.defaultValueLocale
+  const valueLocale = options?.valueLocale || config.defaultValueLocale
 
   text = startEscaping(text)
 

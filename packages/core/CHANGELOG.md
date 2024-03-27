@@ -9,13 +9,18 @@ description: All notable changes to this project will be documented in this file
 ## Added
 
 - Added `localizeValue()`
+- Added `RelativeTime`
+- Added list localization
+- Added custom formatting
 
 ## Changed
 
+- Renamed `config.translations` to `config.messages`
+- Renamed `config.fallbackLocale` to `config.fallback`
+- Renamed `initPsitta()` to `psitta()`
+- Improved types, especially `getConfig()`
 - Renamed `localizeKey()` to `localizeMessage()`
-- Improved types, especially (`getDefaultLocale()`)
-- Improved `getConfig()` - `defaultLocale` should always return type string
-- Simplified localization options/config
+- Improved config default options
 
 ## [0.1.2] - 2024-03-17
 
@@ -35,5 +40,3 @@ description: All notable changes to this project will be documented in this file
 ## [0.1.0] - 2024-03-16 [YANKED]
 
 **Note**: This release was yanked due to missing files. Please refer to version 0.1.2 for the latest changes.
-
-## [0.0.0]

@@ -1,9 +1,7 @@
 import type { Config } from './main'
 import { DEFAULT_I18N_CONFIG } from './main'
 
-export interface PsittaOptions extends Partial<Config> {}
-
-function psitta(options?: PsittaOptions) {
+function psitta(options?: Partial<Config>) {
   if (!globalThis.__psitta) {
     globalThis.__psitta = DEFAULT_I18N_CONFIG
   }

@@ -17,4 +17,9 @@ export const DEFAULT_I18N_CONFIG: Config = {
   valueLocales: { en: 'en-US', sp: 'sp-SP' },
   defaultValueLocale: 'en',
   messages: {},
+  numberDeclensionRules: { en: DEFAULT_NUMBER_DECLENSION_RULE, sp: DEFAULT_NUMBER_DECLENSION_RULE }
 }
+
+export const LOCALIZABLE_CONFIG_KEYS = ['numberDeclensionRules', 'valueLocales'] as const;
+
+export type LocalizableConfigKey = typeof LOCALIZABLE_CONFIG_KEYS[number];

@@ -4,7 +4,7 @@ import format from './format'
 function formatToSegments(
   text: Text,
   values: Partial<Values> = {},
-  options: FormatOptions,
+  options?: FormatOptions,
 ) {
   type Placeholders = InferValues<typeof text>
 

@@ -6,8 +6,7 @@ function localizeUrl(
   locale?: Locale,
   options?: Partial<Config>,
 ) {
-  const { defaultLocale }
-    = options || getConfig()
+  const { defaultLocale } = getConfig(options)
 
   if (!urlString || !locale || defaultLocale === locale)
     return urlString
