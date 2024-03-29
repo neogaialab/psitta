@@ -7,7 +7,7 @@ function interpolate<T>(
   options?: InterpolateOptions,
 ): Text {
   const config = getConfig()
-  const locale = options.valueLocale || config.defaultValueLocale
+  const locale = options?.locale || config.defaultLocale
   const localizedValue = localizeValue(value, locale)
 
   return text.replaceAll(`{${placeholder}}`, localizedValue)

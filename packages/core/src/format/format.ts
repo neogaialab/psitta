@@ -23,7 +23,7 @@ function endEscaping(text: string) {
 
 export interface FormatOptions {
   numberDeclensionRule?: NumberDeclensionRule
-  valueLocale?: string
+  locale?: string
 }
 
 function format<I, V>(
@@ -34,7 +34,7 @@ function format<I, V>(
   options?: FormatOptions,
 ) {
   const config = getConfig()
-  const valueLocale = options?.valueLocale || config.defaultValueLocale
+  const locale = options?.locale || config.defaultLocale
 
   text = startEscaping(text)
 
@@ -62,7 +62,7 @@ function format<I, V>(
       const declension = decline(phrase, value, declineOptions)
 
       const interpolateOptions: InterpolateOptions = {
-        valueLocale,
+        locale,
       }
       part = interpolate(declension.phrase, key, value, interpolateOptions)
 

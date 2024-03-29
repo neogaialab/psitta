@@ -8,8 +8,6 @@ export interface Config {
   messages: RegisteredMessages
   numberDeclensionRules: Record<Locale, NumberDeclensionRule>
   defaultNumberDeclensionRule: NumberDeclensionRule
-  valueLocales: Record<Locale, string>
-  defaultValueLocale: string
 }
 
 export interface Register { }
@@ -115,7 +113,7 @@ export type Segment<P extends Values, V> = {
 }
 
 export interface InterpolateOptions {
-  valueLocale: string
+  locale?: string
 }
 
 export function defineValue<V>(value: V | ValueWithOptions<V>) {

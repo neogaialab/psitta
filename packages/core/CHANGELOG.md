@@ -20,9 +20,14 @@ description: All notable changes to this project will be documented in this file
 - Renamed `localizeKey()` to `localizeMessage()`
 - Renamed `config.translations` to `config.messages`
 - Renamed `config.fallbackLocale` to `config.fallback`
-- Improved types, especially `getConfig()`
-- Improved config default options
+- Used locale and default locale in formatting options instead of a second config
 - Renamed `initPsitta()` to `psitta()`
+- Improved types, especially `getConfig()`
+
+## Fixed
+
+- Fixed config options fallback, especially in detection and localization.
+- Added default locale type
 
 ## [0.1.2] - 2024-03-17
 
