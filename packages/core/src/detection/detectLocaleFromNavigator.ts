@@ -1,13 +1,13 @@
 import { Config } from 'src/typings'
-import { getConfig, parseLocale } from '../utils'
+import { getConfig } from '../utils'
 
 function detectLocaleFromNavigator(options?: Partial<Config>) {
   const config = getConfig(options)
   
-  const language = navigator.language
-  const preferred = parseLocale(language)
+  const tag = navigator.language
+  const preferred = new Intl.Locale(tag)
 
-  if (!config.locales.includes(preferred.lang))
+  if (!config.locales.includes(preferred.language))
     return null
 
   return preferred

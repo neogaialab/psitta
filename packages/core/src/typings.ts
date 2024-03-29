@@ -27,11 +27,6 @@ export type Text = string
 export type Phrase = string
 export type Message = string
 
-export type LocaleObject = {
-  lang: string
-  region?: string
-}
-
 export type Translation = Text
 export type Translations = Record<Locale, Translation>
 export type Messages = Record<Text, Translations>

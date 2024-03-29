@@ -1,5 +1,5 @@
 import { DEFAULT_I18N_CONFIG } from './constants'
-import type { Config, Locale, LocaleObject, LocalizableConfigKey } from './main'
+import type { Config, Locale, LocalizableConfigKey } from './main'
 
 export class RelativeTime {
   constructor(public value: number, public unit: Intl.RelativeTimeFormatUnit) { }
@@ -22,7 +22,6 @@ export function getConfig(options?: Partial<Config>): Config {
 export function getLocalizedConfigValue(key: LocalizableConfigKey, locale: Locale, options?: Partial<Config>) {
   const defaultValueKeys = {
     numberDeclensionRules: 'defaultNumberDeclensionRule',
-    valueLocales: 'defaultValueLocale',
   } satisfies Partial<Record<LocalizableConfigKey, keyof Config>>
 
   const config = getConfig(options)
@@ -34,28 +33,8 @@ export function getLocalizedConfigValue(key: LocalizableConfigKey, locale: Local
 
 export function getLocalizedConfig(locale: Locale, options?: Partial<Config>) {
   const numberDeclensionRule = getLocalizedConfigValue('numberDeclensionRules', locale, options)
-  const valueLocale = getLocalizedConfigValue('valueLocales', locale, options)
   
   return {
     numberDeclensionRule,
-    valueLocale
-  }
-}
-
-export function stringifyLocale(locale: LocaleObject) {
-  let str = locale.lang
-
-  if (locale.region)
-    str += `-${locale.region}`
-
-  return str
-}
-
-export function parseLocale(lang: string): LocaleObject {
-  const parsed = lang.split('-')
-
-  return {
-    lang: parsed[0],
-    region: parsed[1],
   }
 }

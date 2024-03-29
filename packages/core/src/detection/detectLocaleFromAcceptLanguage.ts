@@ -1,5 +1,5 @@
 import { Config } from 'src/typings'
-import { getConfig, parseLocale } from '../utils'
+import { getConfig } from '../utils'
 
 function detectLocaleFromAcceptLanguage(acceptLanguageHeader: string, options?: Partial<Config>) {
   const config = getConfig(options)
@@ -11,19 +11,19 @@ function detectLocaleFromAcceptLanguage(acceptLanguageHeader: string, options?: 
 
   preferredLanguages.sort((a, b) => b.priority - a.priority)
 
-  let lang
+  let tag
 
   for (const preferred of preferredLanguages) {
     if (config.locales.includes(preferred.lang)) {
-      lang = preferred.lang
+      tag = preferred.lang
       break
     }
   }
 
-  if (!lang)
+  if (!tag)
     return undefined
 
-  return parseLocale(lang)
+  return new Intl.Locale(tag)
 }
 
 export default detectLocaleFromAcceptLanguage

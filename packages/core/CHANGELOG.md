@@ -16,6 +16,7 @@ description: All notable changes to this project will be documented in this file
 
 ## Changed
 
+- Used `Intl.Locale` instead of `LocaleObject`
 - Renamed `localizeKey()` to `localizeMessage()`
 - Renamed `config.translations` to `config.messages`
 - Renamed `config.fallbackLocale` to `config.fallback`
