@@ -1,4 +1,4 @@
-import { RelativeTime, ValueWithOptions, type Locale, type Value } from '../main'
+import { RelativeTime, ValueWithOptions, type Locale, type Value, DateRange } from '../main'
 
 function localizeValue<T>(
   value: Value | ValueWithOptions<T>,
@@ -30,6 +30,10 @@ function localizeValue<T>(
   
   if(proposed instanceof RelativeTime) {
     return new Intl.RelativeTimeFormat(locale, options).format(proposed.value, proposed.unit)
+  }
+
+  if(proposed instanceof DateRange) {
+    return new Intl.DateTimeFormat(locale, options).formatRange(proposed.startDate, proposed.endDate)
   }
 
   if (Array.isArray(proposed)) {

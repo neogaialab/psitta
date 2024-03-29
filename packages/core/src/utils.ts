@@ -5,6 +5,10 @@ export class RelativeTime {
   constructor(public value: number, public unit: Intl.RelativeTimeFormatUnit) { }
 }
 
+export class DateRange {
+  constructor(public startDate: Date, public endDate: Date) { }
+}
+
 export function getConfig(options?: Partial<Config>): Config {
   const config = {
     ...DEFAULT_I18N_CONFIG,

@@ -9,18 +9,19 @@ description: All notable changes to this project will be documented in this file
 ## Added
 
 - Added `localizeValue()`
-- Added `RelativeTime`
-- Added list localization
+- Added relative time formatting
+- Added range date formatting
 - Added custom formatting
+- Added list formatting
 
 ## Changed
 
+- Renamed `localizeKey()` to `localizeMessage()`
 - Renamed `config.translations` to `config.messages`
 - Renamed `config.fallbackLocale` to `config.fallback`
-- Renamed `initPsitta()` to `psitta()`
 - Improved types, especially `getConfig()`
-- Renamed `localizeKey()` to `localizeMessage()`
 - Improved config default options
+- Renamed `initPsitta()` to `psitta()`
 
 ## [0.1.2] - 2024-03-17
 

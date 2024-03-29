@@ -1,5 +1,5 @@
 import { FormatOptions } from "./main"
-import { RelativeTime } from "./utils"
+import { DateRange, RelativeTime } from "./utils"
 
 export interface Config {
   defaultLocale: string
@@ -38,7 +38,7 @@ export type Messages = Record<Text, Translations>
 
 export type NumberDeclensionRule = (forms: string[], count: number) => number
 
-export type Value = string | number | boolean | null | undefined | Date | RelativeTime | Iterable<string>
+export type Value = string | number | boolean | null | undefined | Date | RelativeTime | DateRange | Iterable<string>
 
 export type AnyFormatOptions = Record<string, unknown>
 
@@ -54,6 +54,8 @@ export type InferFormatOptions<V> = V extends number
   ? Intl.DateTimeFormatOptions
   : V extends RelativeTime
   ? Intl.RelativeTimeFormatOptions
+  : V extends DateRange
+  ? Intl.DateTimeFormatOptions
   : V extends string
   ? unknown
   : V extends Iterable<string>
