@@ -1,5 +1,4 @@
-import { DEFAULT_NUMBER_DECLENSION_RULE } from '../constants'
-import type { Declension, NumberDeclensionRule, Phrase, Value } from '../main'
+import { getConfig, type Declension, type NumberDeclensionRule, type Phrase, type Value } from '../main'
 
 export function declineForNumber(
   phrase: Phrase,
@@ -28,8 +27,9 @@ export function decline(
   value: Value,
   options?: DeclineOptions,
 ) {
+  const config = getConfig()
   const numberDeclensionRule
-    = options?.numberDeclensionRule || DEFAULT_NUMBER_DECLENSION_RULE
+    = options?.numberDeclensionRule || config.defaultNumberDeclensionRule
 
   const declensionMatch = part.match(/\(([^)]+)\)/)
 

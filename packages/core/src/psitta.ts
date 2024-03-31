@@ -11,6 +11,8 @@ function psitta(options?: Partial<Config>) {
       globalThis.__psitta[option] = options[option]
     }
   }
+
+  return globalThis.__psitta
 }
 
 declare global {

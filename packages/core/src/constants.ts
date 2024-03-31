@@ -10,7 +10,7 @@ export const DEFAULT_NUMBER_DECLENSION_RULE: NumberDeclensionRule = (
 }
 
 export const DEFAULT_I18N_CONFIG: Config = {
-  locales: ['en', 'sp'],
+  locales: ['en', 'es'],
   defaultLocale: 'en',
   fallback: true,
   defaultNumberDeclensionRule: DEFAULT_NUMBER_DECLENSION_RULE,
@@ -18,6 +18,10 @@ export const DEFAULT_I18N_CONFIG: Config = {
   numberDeclensionRules: { en: DEFAULT_NUMBER_DECLENSION_RULE, sp: DEFAULT_NUMBER_DECLENSION_RULE }
 }
 
-export const LOCALIZABLE_CONFIG_KEYS = ['numberDeclensionRules'] as const;
+export const RESOLVABLE_CONFIG_KEYS = ['numberDeclensionRules'] as const;
 
-export type LocalizableConfigKey = typeof LOCALIZABLE_CONFIG_KEYS[number];
+export type ResolvableConfigKey = typeof RESOLVABLE_CONFIG_KEYS[number];
+
+export const DEFAULT_DISPLAY_NAMES_OPTIONS: Intl.DisplayNamesOptions = {
+  type: 'language'
+}

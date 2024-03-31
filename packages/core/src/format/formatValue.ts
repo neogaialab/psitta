@@ -1,6 +1,6 @@
-import { RelativeTime, ValueWithOptions, type Locale, type Value, DateRange } from '../main'
+import { DateRange, RelativeTime, ValueWithOptions, type Locale, type Value } from '../main'
 
-function localizeValue<T>(
+function formatValue<T>(
   value: Value | ValueWithOptions<T>,
   locale?: Locale,
 ) {
@@ -43,4 +43,4 @@ function localizeValue<T>(
   return String(proposed)
 }
 
-export default localizeValue
+export default formatValue

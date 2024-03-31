@@ -1,4 +1,4 @@
-import { localizeValue, type InterpolateOptions, type Placeholder, type Text, type Value, ValueWithOptions, getConfig } from '../main'
+import { type InterpolateOptions, type Placeholder, type Text, type Value, ValueWithOptions, getConfig, formatValue } from '../main'
 
 function interpolate<T>(
   text: Text,
@@ -8,7 +8,7 @@ function interpolate<T>(
 ): Text {
   const config = getConfig()
   const locale = options?.locale || config.defaultLocale
-  const localizedValue = localizeValue(value, locale)
+  const localizedValue = formatValue(value, locale)
 
   return text.replaceAll(`{${placeholder}}`, localizedValue)
 }

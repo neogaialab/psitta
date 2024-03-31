@@ -8,10 +8,11 @@ export * from './format/format'
 export { default as formatToSegments } from './format/formatToSegments'
 export { default as formatToString } from './format/formatToString'
 export * from './format/interpolate'
+export { default as formatValue } from './format/formatValue'
 
 export { default as localizeMessage } from './localization/localizeMessage'
 export { default as localizeUrl } from './localization/localizeUrl'
-export { default as localizeValue } from './localization/localizeValue'
+export { default as prepareFormat } from './localization/prepareFormat'
 
 export { default as collect } from './translation/collect'
 export * from './translation/context'

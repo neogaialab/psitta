@@ -3,16 +3,17 @@ import { getConfig } from '../utils'
 
 function localizeMessage<T extends keyof RegisteredMessages>(
   message: T,
-  locale: Locale,
+  locale?: Locale,
   options?: Partial<Config>,
 ): Message {
   const { defaultLocale, messages, fallback } = getConfig(options)
+  const resolvedLocale = locale || defaultLocale;
 
-  if (locale === defaultLocale)
+  if (resolvedLocale === defaultLocale)
     return message as unknown as Message
 
   const translations = (messages as unknown)[message]
-  const translation = translations?.[locale]
+  const translation = translations?.[resolvedLocale]
 
   if (!translations || !translation) {
     if (!fallback) {

@@ -8,9 +8,9 @@ description: All notable changes to this project will be documented in this file
 
 ## Added
 
-- Added `localizeValue()`
+- Added `formatValue()`
 - Added relative time formatting
-- Added range date formatting
+- Added date range formatting
 - Added custom formatting
 - Added list formatting
 
@@ -22,12 +22,19 @@ description: All notable changes to this project will be documented in this file
 - Renamed `config.fallbackLocale` to `config.fallback`
 - Used locale and default locale in formatting options instead of a second config
 - Renamed `initPsitta()` to `psitta()`
-- Improved types, especially `getConfig()`
+- Added final config as return in `psitta` 
+- Added `es` to the default locales
+- Used `formatValue` in `interpolate`
+- Exposed `prepareFormat` instead of merely `getFormatOptions`
 
 ## Fixed
 
-- Fixed config options fallback, especially in detection and localization.
-- Added default locale type
+- Fixed config options fallback, especially in detection and localization
+- Improved typings, especially in `format` and `interpolate`
+
+## Removed
+
+- Removed `getDefaultLocale`
 
 ## [0.1.2] - 2024-03-17
 
