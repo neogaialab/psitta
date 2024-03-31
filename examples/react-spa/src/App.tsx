@@ -1,19 +1,16 @@
-import { getDefaultLocale } from '@psitta/core';
+import { getConfig } from '@psitta/core';
 import { LocaleContext } from '@psitta/react';
 import { useState } from 'react';
 import ChildComponent from './ChildComponent';
 
 function App() {
-  const [locale, setLocale] = useState(getDefaultLocale());
+  const config = getConfig()
+  const [locale, setLocale] = useState(config.defaultLocale);
 
   return (
-    <>
-      <LocaleContext.Provider value={locale}>
-        <div>
-          <ChildComponent setLocale={setLocale} />
-        </div>
-      </LocaleContext.Provider>
-    </>
+    <LocaleContext.Provider value={[locale, setLocale]}>
+      <ChildComponent />
+    </LocaleContext.Provider>
   )
 }
 

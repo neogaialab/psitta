@@ -2,11 +2,11 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
-import { initPsitta } from "@psitta/core"
+import { psitta } from "@psitta/core"
 
-const translations = {
-  'Hello {username}': {
-    pt: 'Olá {username}',
+const messages = {
+  'Hello {name}': {
+    pt: 'Olá {name}',
   },
   'I have {num} (apple|apples)': {
     pt: 'Eu tenho {num} (maçã|maçãs)'
@@ -16,16 +16,14 @@ const translations = {
   }
 } as const;
 
-initPsitta({
+psitta({
   locales: ['en', 'pt'],
-  translations,
-  datetimeFormats: { en: 'en-US', pt: 'pt-BR' },
-  numberFormats: { en: 'en-US', pt: 'pt-BR' },
+  messages,
 })
 
 declare module '@psitta/core' {
   interface Register {
-    messages: typeof translations
+    messages: typeof messages
   }
 }
 

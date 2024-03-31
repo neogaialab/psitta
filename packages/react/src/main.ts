@@ -1,5 +1,8 @@
 export { default as T } from './components/T'
 export { default as t } from './hooks/t'
+export { default as dn } from './hooks/dn'
+export { default as u } from './hooks/u'
+export { default as v } from './hooks/v'
 export { default as useI18n } from './hooks/useI18n'
 export { default as useLocale } from './hooks/useLocale'
 export { default as createPsitta } from './createPsitta'

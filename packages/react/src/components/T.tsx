@@ -1,4 +1,4 @@
-import { FormatContext, InferValues, Values, collect, formatToSegments, getConfig, getFormatOptions, localizeKey } from '@psitta/core';
+import { FormatContext, InferValues, Values, collect, formatToSegments, prepareFormat } from '@psitta/core';
 import React, { ReactNode, useEffect, useMemo } from 'react';
 import useLocale from '../hooks/useLocale';
 import { Register } from '@psitta/core';
@@ -25,13 +25,12 @@ const T = <
   tag?: keyof JSX.IntrinsicElements;
   children?: Slots<V>
 }) => {
-  const locale = useLocale();
+  const [locale] = useLocale();
 
   const segments = useMemo(() => {
-    const options = getConfig();
-    const formatOptions = getFormatOptions(locale, options)
-    const textToFormat = localizeKey(text as string, locale, options)
-    return formatToSegments(textToFormat, values || {}, formatOptions);
+    const { formatOptions, localizedMessage } = prepareFormat(text as string, locale)
+    
+    return formatToSegments(localizedMessage, values || {}, formatOptions);
   }, [text, values]);
 
   useEffect(() => {

@@ -1,10 +1,12 @@
+import { getConfig } from '@psitta/core'
 import { useContext } from 'react'
 import { LocaleContext } from '../keys'
-import { Locale, getDefaultLocale } from '@psitta/core'
 
 function useLocale() {
-  const locale = useContext<Locale | null>(LocaleContext)
-  return locale || getDefaultLocale()
+  const [locale, setLocale] = useContext(LocaleContext)
+  const defaultLocale = getConfig().defaultLocale;
+
+  return [locale || defaultLocale, setLocale] as [string, typeof setLocale]
 }
 
 export default useLocale

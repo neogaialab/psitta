@@ -4,6 +4,24 @@ name: Changelog
 description: All notable changes to this project will be documented in this file.
 ---
 
+## [Unreleased]
+
+### Added
+
+- Added `dn()`
+- Added `u()`
+- Added `v()`
+
+### Changed
+
+- Added `setLocale`, `dn()` and `u()` to `useI18n` return
+- Changed `useLocale` return to `[locale, setLocale]`
+- Changed `t()` options to be `{ locale }`
+
+### Fixed
+
+- Fixed `T` decline function typing
+
 ## [0.1.0] - 2024-03-20
 
 ### Added

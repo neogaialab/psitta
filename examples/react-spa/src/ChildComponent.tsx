@@ -1,31 +1,46 @@
-import { T } from "@psitta/react";
-import { useState } from "react";
+import { getConfig } from "@psitta/core";
+import { LocaleContext, T, dn, t, u, v } from "@psitta/react";
+import { useContext, useState } from "react";
 
-function ChildComponent({ setLocale }: { setLocale: (locale: string) => void }) {
-    const [count, setCount] = useState(0)
-  
-    return <>
-        <div style={{ display: 'flex', marginBottom: '0.5em' }}>
-            <button onClick={() => setLocale('pt')}>
-                Portuguese
-            </button>
-            <button onClick={() => setLocale('en')}>
-                English
-            </button>
-        </div>
+function ChildComponent() {
+  const config = getConfig()
+  const [count, setCount] = useState(0)
+  const [_, setLocale] = useContext(LocaleContext)
 
-        <p>
-          <T text="I have {num} (apple|apples)" values={{num: count}}>
-            {{
-                num: ({ decline }) => <><span className="count">{count}</span> {decline(count)}</>
-            }}
-          </T>
-        </p>
+  return <div>
+    {t('Hello {name}', { name: 'Batou' })}
 
-        <button onClick={() => setCount((count) => count + 1)}>
-            count is {count}
+    <div style={{ display: "flex", gap: '2em' }}>
+      <p>
+        <T text="I have {num} (apple|apples)" values={{ num: count }}>
+          {{
+            num: ({ decline }) => <><span className="count">{count}</span> {decline(count)}</>
+          }}
+        </T>
+      </p>
+
+      <button onClick={() => setCount((count) => count + 1)}>
+        Add apple
+      </button>
+
+    </div>
+    
+    <p>
+      {v([new Date(), { dateStyle: 'long' }])}
+    </p>
+
+    <div style={{ display: 'flex', marginBottom: '0.5em', marginTop: '0.5em' }}>
+      {config.locales.map((locale) => (
+        <button key={locale} onClick={() => setLocale(locale)}>
+          {dn(locale, { type: 'language' }, { locale })}
         </button>
-    </>;
+      ))}
+    </div>
+
+    <a href={u('/product/{name}', { name: 'Futuristic Hoverboard' })}>
+      Localized link
+    </a>
+  </div>;
 }
 
 export default ChildComponent;
