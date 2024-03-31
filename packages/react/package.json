@@ -1,7 +1,7 @@
 {
   "name": "@psitta/react",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": false,
   "description": "The next-gen type-safe internationalization library powered by GenAI",
   "license": "ISC",
