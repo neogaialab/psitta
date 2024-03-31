@@ -13,6 +13,7 @@ description: All notable changes to this project will be documented in this file
 - Added date range formatting
 - Added custom formatting
 - Added list formatting
+- Added `interpolateUrl`
 
 ## Changed
 

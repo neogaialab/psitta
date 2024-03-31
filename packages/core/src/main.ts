@@ -7,7 +7,7 @@ export * from './format/decline'
 export * from './format/format'
 export { default as formatToSegments } from './format/formatToSegments'
 export { default as formatToString } from './format/formatToString'
-export * from './format/interpolate'
+export { default as interpolateUrl } from './format/interpolateUrl'
 export { default as formatValue } from './format/formatValue'
 
 export { default as localizeMessage } from './localization/localizeMessage'
