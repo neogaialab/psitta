@@ -1,5 +1,8 @@
 export { default as T } from './components/T.vue'
 export { default as t } from './composables/t'
+export { default as dn } from './composables/dn'
+export { default as u } from './composables/u'
+export { default as v } from './composables/v'
 export { default as useI18n } from './composables/useI18n'
 export { default as useLocale } from './composables/useLocale'
 export { default as createPsitta } from './createPsitta'

@@ -1,10 +1,11 @@
-import { type Locale, getDefaultLocale } from '@psitta/core'
-import { localeKey } from '../keys'
-import type { ComputedRef } from 'vue'
-import { inject } from 'vue'
+import { getConfig, type Locale } from '@psitta/core';
+import type { Ref } from 'vue';
+import { inject, ref } from 'vue';
+import { localeKey } from '../keys';
 
 function useLocale() {
-  const locale = inject<ComputedRef<Locale>>(localeKey, getDefaultLocale())
+  const config = getConfig();
+  const locale = inject<Ref<Locale>>(localeKey, ref(config.defaultLocale))
   return locale
 }
 

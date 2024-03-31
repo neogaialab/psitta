@@ -1,33 +1,34 @@
-import { Locale, initPsitta } from "@psitta/core";
+import { Locale, psitta } from "@psitta/core";
 import { createPsitta } from '@psitta/vue';
 import { createApp, reactive, toRefs } from 'vue';
 import App from './App.vue';
 import './style.css';
 
-const translations = {
-  'Hello, {name}': {
-    pt: 'Olá, {name} {ptName}',
+const messages = {
+  'Hello {name}': {
+    pt: 'Olá {name}',
   },
-  'Hi, {name} {lastName}': {
-    pt: 'Oi, {name} {lastName}',
+  'I have {num} (apple|apples)': {
+    pt: 'Eu tenho {num} (maçã|maçãs)'
+  },
+  'Today is {date}': {
+    pt: 'Hoje é {date}'
   }
 } as const;
 
-initPsitta({
+const config = psitta({
   locales: ['en', 'pt'],
-  translations,
-  datetimeFormats: { en: 'en-US', pt: 'pt-BR' },
-  numberFormats: { en: 'en-US', pt: 'pt-BR' },
+  messages,
 })
 
 declare module '@psitta/core' {
   interface Register {
-    messages: typeof translations
+    messages: typeof messages
   }
 }
 
 export const store = reactive<{ locale: Locale }>({
-  locale: "en"
+  locale: config.defaultLocale,
 })
 
 const Psitta = createPsitta({

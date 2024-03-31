@@ -1,35 +1,39 @@
 <script setup lang="ts">
-import { T, t } from '@psitta/vue'
-import { store } from './main'
+import { T, dn, t, u, useLocale, v } from '@psitta/vue'
+import { getConfig } from '@psitta/core'
+import { ref } from 'vue'
+
+const config = getConfig()
+const count = ref(0)
+const currentLocale = useLocale()
 </script>
 
 <template>
-  <div>
-    {{ t('Hello, {name}', { name: 'John' }) }}
+  {{ t('Hello {name}', { name: 'Batou' }) }}
 
-    <T text="Hi, {name} {lastName}" :values="{ name: 'Motoko', lastName: 'Kusanagi' }">
-      <template #name="slotProps">
-        <span style="font-weight: 800;">{{ slotProps.name }}</span>
-      </template>
-      <template #lastName="slotProps">
-        <span style="color: blue">{{ slotProps.lastName }}</span>
+  <div style="display: flex; gap: 2em">
+    <T text="I have {num} (apple|apples)" :values="{ num: count }">
+      <template #num="{ decline }">
+        <span className="count">{{ count }}</span> {{ decline(count) }}
       </template>
     </T>
 
-    <div class="menu">
-      <button @click="store.locale = 'pt'">
-        Portuguese
-      </button>
-      <button @click="store.locale = 'en'">
-        English
-      </button>
-    </div>
+    <button @click="count++">
+      Add apple
+    </button>
   </div>
-</template>
 
-<style scoped>
-.menu {
-  display: flex;
-  gap: 0.25em;
-}
-</style>
+  <p>
+    {{ v([new Date(), { dateStyle: 'long' }]) }}
+  </p>
+
+  <div style="display: flex; margin-bottom: 0.5em; margin-top: 0.5em">
+    <button v-for="locale in config.locales" :key="locale" @click="currentLocale = locale">
+      {{ dn(locale, { type: 'language' }, { locale }) }}
+    </button>
+  </div>
+
+  <a :href="u('/product/{name}', { name: 'Futuristic Hoverboard' })">
+    Localized link
+  </a>
+</template>
