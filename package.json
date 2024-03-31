@@ -13,8 +13,10 @@
   "devDependencies": {
     "@antfu/eslint-config": "^2.6.4",
     "@types/node": "^20.11.20",
+    "@types/yargs": "^17.0.32",
     "eslint": "^8.57.0",
     "rimraf": "^5.0.5",
-    "vitepress": "1.0.0-rc.45"
+    "vitepress": "^1.0.1",
+    "yargs": "^17.7.2"
   }
 }

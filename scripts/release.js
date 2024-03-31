@@ -1,19 +1,70 @@
-import { a, getParentDir, git, github, green, keepAChangelog, packageJson, reset, verify } from './release-lib.js'
+#!/usr/bin/env node
+import { a, getParentDir, git, github, green, keepAChangelog, packageJson, reset, validateNpmOtp, verify } from './release-lib.js'
 import process from 'node:process'
 
-const args = process.argv.slice(2)
+import yargs from 'yargs/yargs'
 
-const RUN_DRY = args.includes('--run-dry') || args.includes('-d')
-const NO_GIT = args.includes('--no-git')
-const NO_NPM = args.includes('--no-npm')
-const NO_GITHUB = args.includes('--no-github')
-const NO_CHANGELOG = args.includes('--no-changelog')
-const NO_BUMP = args.includes('--no-bump')
-const RELEASE_TYPE = args[0]
+const argv = yargs(process.argv.slice(2))
+  .command('$0 <release-type>', 'Release', (yargs) => {
+    yargs.positional('release-type', {
+      describe: 'Semver to bump',
+      choices: ['major', 'minor', 'patch'],
+    })
+  })
+  .options({
+    'run-dry': {
+      alias: 'd',
+      describe: 'Run in dry mode',
+      type: 'boolean',
+      default: false,
+    },
+    'skip-git': {
+      describe: 'Skip Git-related tasks',
+      type: 'boolean',
+      default: false,
+    },
+    'skip-npm': {
+      describe: 'Skip npm-related tasks',
+      type: 'boolean',
+      default: false,
+    },
+    'skip-github': {
+      describe: 'Skip GitHub-related tasks',
+      type: 'boolean',
+      default: false,
+    },
+    'skip-changelog': {
+      describe: 'Skip changelog generation',
+      type: 'boolean',
+      default: false,
+    },
+    'skip-bump': {
+      describe: 'Skip version bumping',
+      type: 'boolean',
+      default: false,
+    },
+    'npm-otp': {
+      describe: 'Specify the OTP for npm authentication',
+      type: 'string',
+      demandOption: true,
+      coerce: validateNpmOtp,
+    },
+  })
+  .help()
+  .argv
+
+const RUN_DRY = argv['run-dry'] || argv.d
+const SKIP_GIT = !!argv['skip-git']
+const SKIP_NPM = argv['skip-npm']
+const SKIP_GITHUB = argv['skip-github']
+const SKIP_CHANGELOG = argv['skip-changelog']
+const SKIP_BUMP = argv['skip-bump']
+const NPM_OTP = argv['npm-otp']
+const RELEASE_TYPE = argv['release-type']
 
 verify({
-  npm: !NO_NPM,
-  git: !NO_GIT,
+  npm: !SKIP_NPM,
+  git: !SKIP_GIT,
 })
 
 const dirName = getParentDir()
@@ -25,37 +76,37 @@ const pkg = packageJson({
 
 let nextVersion = pkg.version
 
-if (!NO_BUMP) {
+if (!SKIP_BUMP) {
   const bump = pkg.bump()
   nextVersion = bump.nextVersion
 }
 
 let changelog
 
-if (!NO_CHANGELOG) {
+if (!SKIP_CHANGELOG) {
   changelog = keepAChangelog()
 
-  if (!NO_BUMP)
+  if (!SKIP_BUMP)
     changelog.bump()
 }
 
 const tagName = `${pkg.name}@${nextVersion}`
 
-!NO_GIT && git({
+!SKIP_GIT && git({
   tagName,
   commitMessage: `chore: release ${pkg.name} v${nextVersion}`,
   push: !RUN_DRY,
 })
 
-if (!RUN_DRY && !NO_NPM)
-  pkg.publish()
+if (!RUN_DRY && !SKIP_NPM)
+  pkg.publish(NPM_OTP)
 
-if (!NO_CHANGELOG)
+if (!SKIP_CHANGELOG)
   changelog.addUnreleasedSection()
 
 const releaseName = `${pkg.name}@${nextVersion}`
 
-if (!NO_GITHUB) {
+if (!SKIP_GITHUB) {
   const { releaseUrl } = github({
     tagName,
     releaseName,
@@ -68,5 +119,5 @@ if (!NO_GITHUB) {
 
 console.log(`${green}Released ${releaseName}${reset}`)
 
-if (!NO_NPM)
+if (!SKIP_NPM)
   console.log(`🔗 ${a({ href: pkg.getPublishUrl().toString() })}\n`)

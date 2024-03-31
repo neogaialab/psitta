@@ -45,8 +45,8 @@ export function packageJson(options) {
     return { nextVersion }
   }
 
-  const publish = () => {
-    execSync(`${packageManager} publish --no-git-checks`)
+  const publish = (otp) => {
+    execSync(`${packageManager} publish --no-git-checks --otp ${otp}`)
   }
 
   const getPublishUrl = () => {
@@ -246,4 +246,12 @@ export function isRemoteSync() {
   catch (error) {
     return false
   }
+}
+
+export function validateNpmOtp(value) {
+  const otpRegex = /^\d{6}$/
+  if (!otpRegex.test(value))
+    throw new Error('Invalid OTP format. OTP must be a 6-digit number. Follow: 000000')
+
+  return value
 }
