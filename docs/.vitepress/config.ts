@@ -18,6 +18,7 @@ export default defineConfig({
       {
         text: 'About',
         items: [
+          { text: 'What is Psitta?', link: '/core/introduction' },
           { text: 'Team', link: '/about/team' },
         ]
       },
@@ -38,11 +39,12 @@ export default defineConfig({
           items: [
             { text: 'Introduction', link: '/introduction' },
             { text: 'Installation', link: '/installation' },
-            { text: 'Quickstart', link: '/quickstart' },
+            { text: 'Configuration', link: '/configuration' },
+            { text: 'Usage', link: '/usage' },
           ]
         },
         {
-          text: 'Guide',
+          text: 'Guides',
           base: '/core/guide',
           items: [
             { text: 'Localization', link: '/localization' },
@@ -50,14 +52,6 @@ export default defineConfig({
             { text: 'Detection', link: '/locale-detection' },
             { text: 'Translation', link: '/translation' },
             { text: 'Config', link: '/config' },
-          ]
-        },
-        {
-          text: 'Integrations',
-          base: '/integrations',
-          items: [
-            { text: 'UI Frameworks', link: '/ui-frameworks' },
-            { text: 'LLMs', link: '/llms' },
           ]
         },
         {
