@@ -14,6 +14,10 @@ description: All notable changes to this project will be documented in this file
 
 - Renamed `formatValue()` to `format()`
 
+## Fixed
+
+- Fixed `InferValues` value default type
+
 ## Removed
 
 - Removed `interpolate()`

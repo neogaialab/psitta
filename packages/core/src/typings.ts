@@ -10,16 +10,6 @@ export interface Config {
   defaultNumberDeclensionRule: NumberDeclensionRule
 }
 
-export interface Register { }
-
-export type AnyMessages = Messages
-
-export type RegisteredMessages = Register extends {
-  messages: infer TMessages extends AnyMessages
-}
-  ? TMessages
-  : AnyMessages
-
 export type Locale = string
 export type Text = string
 export type Phrase = string
@@ -33,6 +23,49 @@ export type Messages = Record<Text, Translations>
 export type NumberDeclensionRule = (forms: string[], count: number) => number
 
 export type Value = string | number | boolean | null | undefined | Date | RelativeTime | DateRange | Iterable<string>
+
+export type Values<V = any> = Record<Key, Value | ValueWithOptions<V>>
+
+export type Key = string
+
+// #region Messages
+
+export interface Register { }
+
+export type AnyMessages = Messages
+
+export type RegisteredMessages = Register extends {
+  messages: infer TMessages extends AnyMessages
+}
+  ? TMessages
+  : AnyMessages
+
+// #endregion
+
+// #region Interpolation
+
+export type InferValues<
+  T extends Text,
+  // eslint-disable-next-line
+  P = {},
+  V = any,
+// @ts-expect-error
+// eslint-disable-next-line,
+> = T extends `${infer Text}{${infer Var}}${infer Rest}`
+  ? InferValues<Rest, P & { [K in Var]: Value | ValueWithOptions<V> }>
+  : P
+
+export function defineValue<V>(value: V | ValueWithOptions<V>) {
+  return value
+}
+
+export function defineValues<V>(values: Record<string, V | ValueWithOptions<V>>) {
+  return values
+}
+
+// #endregion
+
+// #region Formatting
 
 export type AnyFormatOptions = Record<string, unknown>
 
@@ -67,22 +100,21 @@ export type ValueFormatOptions<V> = Intl.NumberFormatOptions
   & CustomFormatOptions<V>
   & RegisteredFormatOptions
 
-export type ValueWithOptions<V> = [V, (InferFormatOptions<V> & CustomFormatOptions<V> & RegisteredFormatOptions)?]
+export type ValueWithOptions<V = any> = [V, (InferFormatOptions<V> & CustomFormatOptions<V> & RegisteredFormatOptions)?]
 
-export type Values<V = any> = Record<Key, Value | ValueWithOptions<V>>
+// #endregion
 
-export type Key = string
+// #region Inflection
 
-export type InferValues<
-  T extends Text,
-  // eslint-disable-next-line
-  P = {},
-  V = unknown
-  // @ts-expect-error
-  // eslint-disable-next-line,
-> = T extends `${infer Text}{${infer Var}}${infer Rest}`
-  ? InferValues<Rest, P & { [K in Var]: Value | ValueWithOptions<V> }>
-  : P
+export type Declension = {
+  phrase: string
+  form: string | undefined
+}
+export type DeclineFunction = (value: Value) => string
+
+// #endregion
+
+// #region Localization
 
 export type FormatFunction<O> = (
   text: Text,
@@ -99,12 +131,6 @@ export type FormatContext<T> = {
 }
 export type FormatCallback<T> = (c: FormatContext<T>) => T
 
-export type Declension = {
-  phrase: string
-  form: string | undefined
-}
-export type DeclineFunction = (value: Value) => string
-
 export type Segment<P extends Values, V> = {
   type: 'text' | 'placeholder'
   key?: keyof P
@@ -113,8 +139,6 @@ export type Segment<P extends Values, V> = {
   decline: DeclineFunction
 }
 
-export function defineValue<V>(value: V | ValueWithOptions<V>) {
-  return value
-}
+// #endregion
 
 export { }
