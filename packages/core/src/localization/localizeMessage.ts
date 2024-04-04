@@ -1,5 +1,5 @@
-import type { Config, Locale, LocalizedMessage, Message, RegisteredMessages } from '../main';
-import { getConfig } from '../utils';
+import { getConfig, type Config } from '../config';
+import { type Locale, type LocalizedMessage, type Message, type RegisteredMessages } from '../localization'
 
 function localizeMessage<T extends keyof RegisteredMessages>(
   message: T,

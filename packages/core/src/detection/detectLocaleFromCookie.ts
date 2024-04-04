@@ -1,4 +1,5 @@
-import { type Locale, getConfig, Config } from '../main'
+import type { Locale } from '../localization'
+import { getConfig, type Config } from '../config'
 
 function detectLocaleFromCookie(localeCookie: string | undefined, options?: Partial<Config>) {
   const config = getConfig(options)

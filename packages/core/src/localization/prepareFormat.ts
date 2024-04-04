@@ -1,6 +1,6 @@
-import { Locale } from "../typings"
-import { resolveConfig } from "../utils"
-import localizeMessage from "./localizeMessage"
+import { resolveConfig } from "../config"
+import { type Locale } from "../localization"
+import { localizeMessage } from "./"
 
 function prepareFormat(message: string, locale?: Locale) {
   const localizedMessage = localizeMessage(message, locale)

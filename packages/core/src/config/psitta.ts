@@ -1,5 +1,4 @@
-import type { Config } from './main'
-import { DEFAULT_I18N_CONFIG } from './main'
+import { DEFAULT_I18N_CONFIG, type Config } from './'
 
 function psitta(options?: Partial<Config>) {
   if (!globalThis.__psitta) {

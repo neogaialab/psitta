@@ -1,4 +1,5 @@
-import { type Locale, getConfig, Config } from '../main'
+import { getConfig, type Config } from '../config'
+import type { Locale } from '../localization'
 
 function detectLocaleFromPathname(pathname: string, options?: Partial<Config>) {
   const config = getConfig(options)

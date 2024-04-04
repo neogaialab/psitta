@@ -1,10 +1,10 @@
-import { type Key, type Text } from '../main'
+import { type Key } from '../interpolation'
 
 function interpolateValue(
-  text: Text,
+  text: string,
   key: Key,
   valueString: string,
-): Text {
+): string {
   const regex = new RegExp(`{${key}}`, 'g');
   return text.replace(regex, valueString);
 }

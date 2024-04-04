@@ -1,13 +1,5 @@
-import { DEFAULT_I18N_CONFIG } from './constants'
-import type { Config, Locale, ResolvableConfigKey } from './main'
-
-export class RelativeTime {
-  constructor(public value: number, public unit: Intl.RelativeTimeFormatUnit) { }
-}
-
-export class DateRange {
-  constructor(public startDate: Date, public endDate: Date) { }
-}
+import { DEFAULT_I18N_CONFIG, type Config, type ResolvableConfigKey } from './'
+import type { Locale } from '../localization'
 
 export function getConfig(options?: Partial<Config>): Config {
   const config = {
@@ -33,7 +25,7 @@ export function resolveConfigValue(key: ResolvableConfigKey, locale: Locale, opt
 
 export function resolveConfig(locale: Locale, options?: Partial<Config>) {
   const numberDeclensionRule = resolveConfigValue('numberDeclensionRules', locale, options)
-  
+
   return {
     numberDeclensionRule,
   }

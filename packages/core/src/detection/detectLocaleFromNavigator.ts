@@ -1,5 +1,4 @@
-import { Config } from 'src/typings'
-import { getConfig } from '../utils'
+import { getConfig, type Config } from '../config'
 
 function detectLocaleFromNavigator(options?: Partial<Config>) {
   const config = getConfig(options)

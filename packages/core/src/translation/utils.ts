@@ -1,5 +1,4 @@
-import { DEFAULT_I18N_CONFIG } from '../constants'
-import { getConfig } from '../utils'
+import { getConfig, DEFAULT_I18N_CONFIG } from '../config'
 
 export function getTranslationsObject(key: string) {
   const config = getConfig()

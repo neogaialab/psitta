@@ -1,5 +1,5 @@
-import type { Config, Locale } from '../main'
-import { getConfig } from '../utils'
+import { Locale } from './'
+import { getConfig, type Config } from '../config'
 
 function localizeUrl(
   urlString?: string,

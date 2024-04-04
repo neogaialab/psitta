@@ -1,3 +1,4 @@
-import type { RegisteredMessages, Values } from '../main'
+import { Values } from '../interpolation'
+import { RegisteredMessages } from '../localization'
 
 export const collection: Record<keyof RegisteredMessages, Values> = {}

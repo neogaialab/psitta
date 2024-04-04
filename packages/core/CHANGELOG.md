@@ -13,6 +13,11 @@ description: All notable changes to this project will be documented in this file
 ## Changed
 
 - Renamed `formatValue()` to `format()`
+- Renamed `format()` to `resolve()`
+- Renamed `formatToString()` to `resolveToString()`
+- Renamed `formatToSegments()` to `resolveToSegments()`
+- Merged `Text` into `Message`
+- Renamed values to context
 
 ## Fixed
 
