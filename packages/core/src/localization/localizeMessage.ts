@@ -1,11 +1,11 @@
-import type { Config, Locale, Message, RegisteredMessages } from '../main'
-import { getConfig } from '../utils'
+import type { Config, Locale, LocalizedMessage, Message, RegisteredMessages } from '../main';
+import { getConfig } from '../utils';
 
 function localizeMessage<T extends keyof RegisteredMessages>(
   message: T,
   locale?: Locale,
   options?: Partial<Config>,
-): Message {
+): LocalizedMessage {
   const { defaultLocale, messages, fallback } = getConfig(options)
   const resolvedLocale = locale || defaultLocale;
 

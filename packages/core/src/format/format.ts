@@ -1,7 +1,7 @@
+import interpolateValue from '../interpolation/interpolateValue'
 import { MESSAGE_PATTERN } from '../constants'
-import { InterpolateOptions, NumberDeclensionRule, Values, getConfig, type FormatCallback, type Text, type Value } from '../main'
+import { NumberDeclensionRule, Values, getConfig, type FormatCallback, type Text, type Value, formatValue } from '../main'
 import { decline } from './decline'
-import interpolate from './interpolate'
 
 function startEscaping(text: string) {
   return (text = text
@@ -61,10 +61,9 @@ function format<I, V>(
       const phrase = part
       const declension = decline(phrase, value, declineOptions)
 
-      const interpolateOptions: InterpolateOptions = {
-        locale,
-      }
-      part = interpolate(declension.phrase, key, value, interpolateOptions)
+
+      const formattedValue = formatValue(value, locale) 
+      part = interpolateValue(declension.phrase, key, formattedValue)
 
       part = endEscaping(part)
 

@@ -24,6 +24,7 @@ export type Locale = string
 export type Text = string
 export type Phrase = string
 export type Message = string
+export type LocalizedMessage = string
 
 export type Translation = Text
 export type Translations = Record<Locale, Translation>
@@ -68,9 +69,9 @@ export type ValueFormatOptions<V> = Intl.NumberFormatOptions
 
 export type ValueWithOptions<V> = [V, (InferFormatOptions<V> & CustomFormatOptions<V> & RegisteredFormatOptions)?]
 
-export type Values<V = any> = Record<Placeholder, Value | ValueWithOptions<V>>
+export type Values<V = any> = Record<Key, Value | ValueWithOptions<V>>
 
-export type Placeholder = string
+export type Key = string
 
 export type InferValues<
   T extends Text,
@@ -110,10 +111,6 @@ export type Segment<P extends Values, V> = {
   part?: string
   values?: Partial<V>
   decline: DeclineFunction
-}
-
-export interface InterpolateOptions {
-  locale?: string
 }
 
 export function defineValue<V>(value: V | ValueWithOptions<V>) {
