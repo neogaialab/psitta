@@ -1,9 +1,8 @@
-import { type Message } from "../localization"
-import { type NumberDeclensionRule, type DeclineFunction } from "../inflection"
+import { type InflectFunction } from "../grammar"
 import { type Values } from "../interpolation"
+import { type Message } from "../localization"
 
 export interface ResolveOptions {
-  numberDeclensionRule?: NumberDeclensionRule
   locale?: string
 }
 
@@ -18,7 +17,7 @@ export type ResolveContext<T> = {
   part: string
   dynamic?: boolean
   key?: string
-  decline: DeclineFunction
+  inflect: InflectFunction
 }
 export type ResolveCallback<T> = (c: ResolveContext<T>) => T
 
@@ -27,5 +26,5 @@ export type Segment<P extends Values, V> = {
   key?: keyof P
   part?: string
   values?: Partial<V>
-  decline: DeclineFunction
+  inflect: InflectFunction
 }

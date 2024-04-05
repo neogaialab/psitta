@@ -1,15 +1,27 @@
-import type { Config } from './'
-import { DEFAULT_NUMBER_DECLENSION_RULE } from "../inflection";
+import { DEFAULT_GENDER_INFLECTION_RULE, DEFAULT_NUMBER_INFLECTION_RULE } from "../grammar";
+import type { Config } from './';
 
 export const MESSAGE_PATTERN = /{[^{}]+}\s?(?:\([^)]+\))?|[^{}]+/g
 
 export const DEFAULT_I18N_CONFIG: Config = {
-    locales: ['en', 'es'],
-    defaultLocale: 'en',
-    fallback: true,
-    defaultNumberDeclensionRule: DEFAULT_NUMBER_DECLENSION_RULE,
-    messages: {},
-    numberDeclensionRules: { en: DEFAULT_NUMBER_DECLENSION_RULE, sp: DEFAULT_NUMBER_DECLENSION_RULE }
+  locales: ['en', 'es'],
+  defaultLocale: 'en',
+  fallback: true,
+  messages: {},
+  grammar: {
+    rules: {
+      en: {
+        gender: null,
+        number: DEFAULT_NUMBER_INFLECTION_RULE,
+      },
+      es: {
+        gender: DEFAULT_GENDER_INFLECTION_RULE,
+        number: DEFAULT_NUMBER_INFLECTION_RULE,
+      },
+    },
+    defaultRules: {
+      gender: DEFAULT_GENDER_INFLECTION_RULE,
+      number: DEFAULT_NUMBER_INFLECTION_RULE,
+    }
+  },
 }
-
-export const RESOLVABLE_CONFIG_KEYS = ['numberDeclensionRules'] as const;

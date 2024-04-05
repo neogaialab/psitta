@@ -1,6 +1,7 @@
+import inflect from '../grammar/inflect'
 import { getConfig, MESSAGE_PATTERN } from '../config'
 import { format } from '../format'
-import { decline } from '../inflection'
+import { DUMMY_INFLECT } from '../grammar'
 import { interpolateValue, type Values, type Value } from '../interpolation'
 import { type Message } from '../localization'
 import { type ResolveOptions, type ResolveCallback } from './'
@@ -18,15 +19,13 @@ function resolve<I, V extends Value>(
 
   message = startEscaping(message)
 
-  const DUMMY_DECLINE = () => ''
-
   return (
     message.match(MESSAGE_PATTERN)?.reduce((prev, part) => {
       const isNamed = part.startsWith('{')
 
       if (!isNamed) {
         part = endEscaping(part)
-        return callbackFn({ prev, part, decline: DUMMY_DECLINE })
+        return callbackFn({ prev, part, inflect: DUMMY_INFLECT })
       }
 
       const key = part.substring(1, part.indexOf('}'))
@@ -34,20 +33,19 @@ function resolve<I, V extends Value>(
 
       if (value === undefined) {
         part = endEscaping(part)
-        return callbackFn({ prev, part, key, decline: DUMMY_DECLINE })
+        return callbackFn({ prev, part, key, inflect: DUMMY_INFLECT })
       }
 
-      const declineOptions = { numberDeclensionRule: options?.numberDeclensionRule }
       const phrase = part
-      const declension = decline(phrase, value, declineOptions)
+      const inflection = inflect(phrase, value, locale)
 
       const formattedValue = format(value, locale)
-      part = interpolateValue(declension.phrase, key, formattedValue)
+      part = interpolateValue(inflection.phrase, key, formattedValue)
 
       part = endEscaping(part)
 
-      const declinePhrase = (v: Value) => {
-        return decline(phrase, v, declineOptions).form || ''
+      const inflectPhrase = (value: Value) => {
+        return inflect(phrase, value, locale).form || ''
       }
 
       return callbackFn({
@@ -55,7 +53,7 @@ function resolve<I, V extends Value>(
         part,
         key,
         dynamic: true,
-        decline: declinePhrase,
+        inflect: inflectPhrase,
       })
     }, initialValue) || initialValue
   )

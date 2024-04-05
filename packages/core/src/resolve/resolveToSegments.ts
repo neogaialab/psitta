@@ -15,7 +15,7 @@ function resolveToSegments(
       part: c.part,
       key: c.key as keyof Placeholders,
       values,
-      decline: c.decline,
+      inflect: c.inflect,
     }
 
     return [...c.prev, segment]

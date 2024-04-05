@@ -1,5 +1,4 @@
-import { RESOLVABLE_CONFIG_KEYS } from "./"
-import type { NumberDeclensionRule } from "../inflection"
+import type { InflectionRule } from "../grammar"
 import type { Locale, RegisteredMessages } from "../localization"
 
 export interface Config {
@@ -7,8 +6,15 @@ export interface Config {
   fallback: boolean
   locales: Locale[]
   messages: RegisteredMessages
-  numberDeclensionRules: Record<Locale, NumberDeclensionRule>
-  defaultNumberDeclensionRule: NumberDeclensionRule
+  grammar: GrammarConfig
 }
 
-export type ResolvableConfigKey = typeof RESOLVABLE_CONFIG_KEYS[number];
+export interface GrammarConfig {
+  rules: Record<Locale, InflectionRules>
+  defaultRules: InflectionRules
+}
+
+export interface InflectionRules {
+  number: InflectionRule<number> | null
+  gender: InflectionRule<string> | null
+}

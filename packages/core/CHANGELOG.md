@@ -9,6 +9,7 @@ description: All notable changes to this project will be documented in this file
 ## Added
 
 - Added `interpolateValue()`
+- Added support for gender inflection
 
 ## Changed
 
@@ -18,6 +19,7 @@ description: All notable changes to this project will be documented in this file
 - Renamed `formatToSegments()` to `resolveToSegments()`
 - Merged `Text` into `Message`
 - Renamed values to context
+- Changed grammar configuration
 
 ## Fixed
 
@@ -26,6 +28,8 @@ description: All notable changes to this project will be documented in this file
 ## Removed
 
 - Removed `interpolate()`
+- Removed config resolution functions
+- Removed `prepareFormat`
 
 ## [0.2.0] - 2024-03-31
 
