@@ -2,14 +2,14 @@ import inflect from '../grammar/inflect'
 import { getConfig, MESSAGE_PATTERN } from '../config'
 import { format } from '../format'
 import { DUMMY_INFLECT } from '../grammar'
-import { interpolateValue, type Values, type Value } from '../interpolation'
+import { interpolateValue, type Context, type Value } from '../interpolation'
 import { type Message } from '../localization'
 import { type ResolveOptions, type ResolveCallback } from './'
 import { endEscaping, startEscaping } from './utils'
 
 function resolve<I, V extends Value>(
   message: Message,
-  values: Partial<Values<V>> = {},
+  context: Partial<Context<V>> = {},
   callbackFn: ResolveCallback<I>,
   initialValue: I,
   options?: ResolveOptions,
@@ -29,7 +29,7 @@ function resolve<I, V extends Value>(
       }
 
       const key = part.substring(1, part.indexOf('}'))
-      const value = (values as any)[key]
+      const value = (context as any)[key]
 
       if (value === undefined) {
         part = endEscaping(part)

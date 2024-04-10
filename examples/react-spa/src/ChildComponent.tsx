@@ -8,13 +8,13 @@ function ChildComponent() {
   const [_, setLocale] = useContext(LocaleContext)
 
   return <div>
-    {t('Hello {name}', { name: 'Batou' })}
+    {t('Hello {name}', { name: 'Batou', g: 'masc' })}
 
     <div style={{ display: "flex", gap: '2em' }}>
       <p>
-        <T text="I have {num} (apple|apples)" values={{ num: count }}>
+        <T text="I have {num} (apple|apples)" context={{ num: count }}>
           {{
-            num: ({ decline }) => <><span className="count">{count}</span> {decline(count)}</>
+            num: ({ inflect }) => <><span className="count">{count}</span> {inflect(count)}</>
           }}
         </T>
       </p>

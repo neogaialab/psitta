@@ -1,4 +1,4 @@
-import type { Locale } from '@psitta/core';
+import type { InferContext, Locale } from '@psitta/core';
 import { interpolateUrl, localizeUrl } from '@psitta/core';
 import useLocale from './useLocale';
 
@@ -6,9 +6,9 @@ type UrlOptions = {
   locale?: Locale;
 }
 
-function u(
-  url: string,
-  values?: Record<string, string>,
+function u<T extends string>(
+  url: T,
+  context?: Partial<InferContext<T>>,
   options?: UrlOptions,
 ) {
   let locale = options?.locale
@@ -18,10 +18,10 @@ function u(
 
   let formattedUrl: string;
 
-  if(!values) {
+  if(!context) {
     formattedUrl = url
   } else {
-    formattedUrl = interpolateUrl(url, values);
+    formattedUrl = interpolateUrl(url, context as any);
   }
 
   return localizeUrl(formattedUrl, locale)

@@ -1,5 +1,5 @@
 import { type InflectFunction } from "../grammar"
-import { type Values } from "../interpolation"
+import { type Context } from "../interpolation"
 import { type Message } from "../localization"
 
 export interface ResolveOptions {
@@ -8,7 +8,7 @@ export interface ResolveOptions {
 
 export type ResolveFunction<O> = (
   message: Message,
-  values?: Partial<Values>,
+  context?: Partial<Context>,
   options?: ResolveOptions,
 ) => O
 
@@ -21,10 +21,10 @@ export type ResolveContext<T> = {
 }
 export type ResolveCallback<T> = (c: ResolveContext<T>) => T
 
-export type Segment<P extends Values, V> = {
+export type Segment<P extends Context, V> = {
   type: 'text' | 'placeholder'
   key?: keyof P
   part?: string
-  values?: Partial<V>
+  context?: Partial<V>
   inflect: InflectFunction
 }

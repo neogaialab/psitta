@@ -1,27 +1,27 @@
-import { type InferValues, type Values } from '../interpolation'
+import { type InferContext, type Context } from '../interpolation'
 import { type Message } from '../localization'
 import { resolve, type ResolveCallback, type ResolveOptions, type Segment } from './'
 
 function resolveToSegments(
   message: Message,
-  values: Partial<Values> = {},
+  context: Partial<Context> = {},
   options?: ResolveOptions,
 ) {
-  type Placeholders = InferValues<typeof message>
+  type Placeholders = InferContext<typeof message>
 
-  const cb: ResolveCallback<Segment<Placeholders, Values>[]> = (c) => {
-    const segment: Segment<Placeholders, Values> = {
+  const cb: ResolveCallback<Segment<Placeholders, Context>[]> = (c) => {
+    const segment: Segment<Placeholders, Context> = {
       type: !c.dynamic ? 'text' : 'placeholder',
       part: c.part,
       key: c.key as keyof Placeholders,
-      values,
+      context,
       inflect: c.inflect,
     }
 
     return [...c.prev, segment]
   }
 
-  return resolve(message, values, cb, [], options)
+  return resolve(message, context, cb, [], options)
 }
 
 export default resolveToSegments

@@ -1,20 +1,22 @@
 <script setup lang="ts">
 import { T, dn, t, u, useLocale, v } from '@psitta/vue'
-import { getConfig } from '@psitta/core'
+import { defineValue, getConfig } from '@psitta/core'
 import { ref } from 'vue'
 
 const config = getConfig()
 const count = ref(0)
 const currentLocale = useLocale()
+
+const now = defineValue([new Date(), { dateStyle: 'short' }])
 </script>
 
 <template>
   {{ t('Hello {name}', { name: 'Batou' }) }}
 
   <div style="display: flex; gap: 2em">
-    <T text="I have {num} (apple|apples)" :values="{ num: count }">
-      <template #num="{ decline }">
-        <span className="count">{{ count }}</span> {{ decline(count) }}
+    <T text="I have {num} (apple|apples)" :context="{ num: count }">
+      <template #num="{ inflect }">
+        <span className="count">{{ count }}</span> {{ inflect(count) }}
       </template>
     </T>
 
@@ -24,7 +26,13 @@ const currentLocale = useLocale()
   </div>
 
   <p>
-    {{ v([new Date(), { dateStyle: 'long' }]) }}
+    {{ v(now) }}
+  </p>
+
+  <p>
+    {{ t('Today is {date}', {
+      date: new Date(),
+    }) }}
   </p>
 
   <div style="display: flex; margin-bottom: 0.5em; margin-top: 0.5em">

@@ -1,4 +1,4 @@
-import { Values } from '../interpolation'
+import { Context } from '../interpolation'
 import { RegisteredMessages } from '../localization'
 
-export const collection: Record<keyof RegisteredMessages, Values> = {}
+export const collection: Record<keyof RegisteredMessages, Context> = {}

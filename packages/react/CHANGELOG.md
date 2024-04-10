@@ -4,6 +4,16 @@ name: Changelog
 description: All notable changes to this project will be documented in this file.
 ---
 
+## [Unreleased]
+
+### Changed
+
+- Changed `values` to `context`
+
+### Fixed
+
+- Fixed `u()` key inference
+
 ## [0.2.0] - 2024-03-31
 
 ### Added

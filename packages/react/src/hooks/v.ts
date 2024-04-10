@@ -1,5 +1,5 @@
 import type { Locale, Value, ValueWithOptions } from '@psitta/core'
-import { formatValue } from '@psitta/core'
+import { format } from '@psitta/core'
 import useLocale from './useLocale'
 
 type ValueOptions = {
@@ -15,7 +15,7 @@ function v<V extends Value>(
   if (!locale)
     locale = useLocale()[0]
 
-  return formatValue(value, locale)
+  return format(value, locale)
 }
 
 export default v

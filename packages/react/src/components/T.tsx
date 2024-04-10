@@ -1,9 +1,9 @@
-import { FormatContext, InferValues, Values, collect, formatToSegments, prepareFormat } from '@psitta/core';
+import { ResolveContext, InferContext, Context, collect, resolveToSegments, localizeMessage } from '@psitta/core';
 import React, { ReactNode, useEffect, useMemo } from 'react';
 import useLocale from '../hooks/useLocale';
 import { Register } from '@psitta/core';
 
-type SlotProps<V> = V & { decline: FormatContext<any>['decline'] }
+type SlotProps<V> = V & { inflect: ResolveContext<any>['inflect'] }
 type Slots<V> = Partial<Record<keyof V, (ReactNode | ((slotProps: SlotProps<V>) => ReactNode))>>
 
 const T = <
@@ -11,31 +11,33 @@ const T = <
     // @ts-ignore
   K extends keyof R['messages'],
     // @ts-ignore
-  V extends InferValues<K | E>,
+  V extends InferContext<K | E>,
   // @ts-ignore
   E extends R['messages'][K][keyof R['messages'][K]]
 >({
   text,
-  values = {} as V,
+  context = {} as V,
   tag = 'span',
   children
 }: {
   text: K;
-  values?: Partial<V>;
+  context?: Partial<V>;
   tag?: keyof JSX.IntrinsicElements;
   children?: Slots<V>
 }) => {
   const [locale] = useLocale();
 
   const segments = useMemo(() => {
-    const { formatOptions, localizedMessage } = prepareFormat(text as string, locale)
+    const localizedMessage = localizeMessage(text as string, locale)
     
-    return formatToSegments(localizedMessage, values || {}, formatOptions);
-  }, [text, values]);
+    return resolveToSegments(localizedMessage, context || {}, {
+      locale,
+    });
+  }, [text, context]);
 
   useEffect(() => {
     if (import.meta.env.DEV) {
-      collect(text as any, values as Values);
+      collect(text as any, context as Context);
     }
   }, []);
 
@@ -49,7 +51,7 @@ const T = <
         <>{
           typeof slots[segment.key!] === 'function'
             // @ts-ignore
-            ? slots[segment.key!]({ ...segment.values as V, decline: segment.decline })
+            ? slots[segment.key!]({ ...segment.context as V, inflect: segment.inflect })
             : slots[segment.key!]
         }</>
       )}

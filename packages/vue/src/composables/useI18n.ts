@@ -8,8 +8,8 @@ function useI18n() {
   const localeRef = useLocale();
   const locale = localeRef.value
 
-  const t: typeof tLocale = (text, values, options) => {
-    return tLocale(text, values, options || { locale })
+  const t: typeof tLocale = (text, context, options) => {
+    return tLocale(text, context, options || { locale })
   }
 
   const dn: typeof dnLocale = (code, intlOptions, options) => {
@@ -20,8 +20,8 @@ function useI18n() {
     return vLocale(value, options || { locale })
   }
 
-  const u: typeof uLocale = (url, values, options) => {
-    return uLocale(url, values, options || { locale })
+  const u: typeof uLocale = (url, context, options) => {
+    return uLocale(url, context, options || { locale })
   }
 
   return { locale: localeRef, t, dn, v, u }

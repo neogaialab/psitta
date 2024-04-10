@@ -1,5 +1,5 @@
-import type { InferValues, Locale, RegisteredMessages, Values } from '@psitta/core'
-import { collect, formatToString, prepareFormat } from '@psitta/core'
+import type { InferContext, Locale, RegisteredMessages, Context } from '@psitta/core'
+import { collect, localizeMessage, resolveToString } from '@psitta/core'
 import { isServer } from '../utils'
 import useLocale from './useLocale'
 
@@ -16,12 +16,12 @@ type TranslateOptions = {
 
 function t<T extends keyof RegisteredMessages>(
   key: T,
-  values?: Partial<InferValues<T | EveryTranslationOf<T>>>,
+  context?: Partial<InferContext<T | EveryTranslationOf<T>>>,
   options?: TranslateOptions,
 ) {
   if (import.meta.env.DEV) {
     if (!isServer)
-      collect(key, values as Values)
+      collect(key, context as Context)
   }
 
   let locale = options?.locale
@@ -29,9 +29,11 @@ function t<T extends keyof RegisteredMessages>(
   if (!locale)
     locale = useLocale().value
 
-  const { localizedMessage, formatOptions } = prepareFormat(key as string, locale)
+  const localizedMessage = localizeMessage(key as string, locale)
 
-  return formatToString(localizedMessage, values, formatOptions)
+  return resolveToString(localizedMessage, context, {
+    locale
+  })
 }
 
 export default t

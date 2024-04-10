@@ -6,7 +6,7 @@ import { psitta } from "@psitta/core"
 
 const messages = {
   'Hello {name}': {
-    pt: 'Olá {name}',
+    pt: 'Olá {name}, seja bem-vind{g} (o|a)',
   },
   'I have {num} (apple|apples)': {
     pt: 'Eu tenho {num} (maçã|maçãs)'
