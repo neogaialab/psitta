@@ -1,6 +1,24 @@
 import { getConfig, type Config } from '../config';
 import { type Locale, type LocalizedMessage, type Message, type RegisteredMessages } from '../localization'
 
+/**
+ * Localizes a message based on the provided locale and configuration.
+ *
+ * @template T - The key of the message within the registered message translations.
+ * @param {T} message - The key of the message to localize.
+ * @param {Locale} [locale] - The preferred locale code for the message (optional).
+ * @param {Partial<Config>} [options] - Optional configuration options for localization (overrides defaults).
+ * @returns {LocalizedMessage} The localized message or the message key itself if no translation found.
+ * @throws {Error} - If no translation is found and fallback is disabled in the configuration.
+ * 
+ * @example
+ * 
+ * ```typescript
+ * const spanishMessage = localizeMessage('Hello!', 'es'); // assuming translations exist
+ * console.log(spanishMessage);
+ * // Output: "¡Hola!"
+ * ```
+ */
 function localizeMessage<T extends keyof RegisteredMessages>(
   message: T,
   locale?: Locale,
