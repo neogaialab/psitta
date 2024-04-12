@@ -1,6 +1,6 @@
 // #region Utils
 
-import { config } from './generate-reference'
+import { config } from './generate-reference.js'
 
 export function replaceJsDocLinks(text) {
   const linkRegex = /\{@link\s+(.+?)(?:\|(.+?))?\}/g
@@ -73,10 +73,27 @@ export function generateExamples(examples) {
     return null
 
   return examples.map((e) => {
-    const item = `  ${generateCode(e)}`
+    const lines = e.split('\n')
+    const linesWithSpace = lines.map(line => `  ${line}`)
+    const stringWithSpace = linesWithSpace.join('\n')
+
+    const item = `${stringWithSpace}`
 
     return item
   }).join('\n\n')
+}
+
+export function generateDetails(details) {
+  if (!details)
+    return null
+
+  const lines = details.split('\n')
+  const linesWithSpace = lines.map(line => `  ${line}`)
+  const stringWithSpace = linesWithSpace.join('\n')
+
+  const content = `${stringWithSpace}`
+
+  return content
 }
 
 export function generateSignature(item) {
@@ -113,7 +130,7 @@ export function generateItemReference(item) {
   const examples = generateExamples(item.examples)
   const returns = item.returns[0].description
   const deprecated = item.deprecated
-  const details = item.customTags?.find(el => el.tag === 'details').value
+  const details = generateDetails(item.customTags?.find(el => el.tag === 'details').value)
 
   let reference = `## ${item.name} <Badge type="info" text="${item.kind}" />${deprecated ? '<Badge type="warning" text="Deprecated" /> ' : ''} {#${item.id}}\n`
 
@@ -140,7 +157,7 @@ export function generateItemReference(item) {
 
   if (details) {
     reference += '\n- **Details**\n\n'
-    reference += `  ${details}\n`
+    reference += `${details}\n`
   }
 
   if (examples) {
@@ -161,10 +178,8 @@ export function generateItemReference(item) {
   return reference
 }
 
-export function generatePage(page) {
-  let content = ''
-
-  content += `# ${page.title} {#${page.id}}\n\n`
+export function generatePage(template, main) {
+  const content = template.replaceAll('<!-- MAIN -->', main)
 
   return content
 }

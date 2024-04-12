@@ -11,7 +11,7 @@ export type InferContext<
   // eslint-disable-next-line
   P = {},
   V extends Value = any,
-// @ts-expect-error
+// @ts-ignore
 // eslint-disable-next-line,
 > = T extends `${infer Text}{${infer Var}}${infer Rest}`
   ? InferContext<Rest, P & { [K in Var]: Value | ValueWithOptions<V> }>

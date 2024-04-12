@@ -8,13 +8,16 @@
     "lint:fix": "eslint . --fix",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:preview": "vitepress preview docs",
+    "docs:generate": "tsc --lib 'es2021, dom' --skipLibCheck --outDir ./packages/core/dist/docs ./packages/core/src/**/*.ts && node ./scripts/generate-reference"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.6.4",
+    "@types/jsdoc-to-markdown": "^7.0.6",
     "@types/node": "^20.11.20",
     "@types/yargs": "^17.0.32",
     "eslint": "^8.57.0",
+    "jsdoc-to-markdown": "^8.0.1",
     "rimraf": "^5.0.5",
     "vitepress": "^1.0.1",
     "yargs": "^17.7.2"

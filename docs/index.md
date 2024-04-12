@@ -7,7 +7,7 @@ hero:
   tagline: Type-safe, AI-powered internationalization for modern web development
   actions:
     - theme: brand
-      text: Introduction
+      text: Get Started
       link: /core/introduction
     - theme: alt
       text: View on GitHub

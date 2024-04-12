@@ -1,52 +1,70 @@
 # Localization API {#localization-api}
 
-## localizeUrl() {#localizeUrl}
+## localizeMessage <Badge type="info" text="function" /> {#localizeMessage}
 
-Generates a localized URL by appending or modifying the path based on the provided locale.
+Localizes a message based on the provided locale and configuration.
 
 - **Signature**
 
-  ```ts
-  function localizeUrl(
-    urlString?: string,
-    locale?: Locale,
-    options?: Partial<Config>,
-  ): string | undefined
+  ```typescript
+  function localizeMessage(
+    message: T,
+    locale: Locale,
+    options: Partial<Config>
+  ): LocalizedMessage
   ```
 
 - **Parameters**
 
-  - `urlString` (optional): The URL string to be localized.
-  - `locale` (optional): The locale to be used for localization.
-  - `options` (optional): Additional configuration options.
+  - `message`: The key of the message to localize.
+  - `locale`: The preferred locale code for the message (optional).
+  - `options`: Optional configuration options for localization (overrides defaults).
 
-- **Return value**
+- **Returns**
 
-  Returns the localized URL string if successful; otherwise, `undefined`.
+  The localized message or the message key itself if no translation found.
 
-- **Details**
+- **Examples**
 
-  The `localizeUrl()` function generates a localized URL by appending or modifying the path based on the provided locale. If the `urlString` is not provided, or if the `locale` is not specified, or if the default locale matches the provided locale, the function returns the original URL string.
-
-  If the URL already contains the locale path segment, the function returns the original URL string without any modifications.
-
-  The function utilizes a dummy host (`http://dummyhost`) to parse and manipulate the URL. After localization, it ensures that the modified URL does not start with the dummy host before returning the final result.
-
-- **Example**
-
-  ```ts
-  import localizeUrl from 'path-to-localize-url'
-
-  const originalUrl = 'https://example.com/page'
-  const locale = 'en'
-
-  const localizedUrl = localizeUrl(originalUrl, locale)
-
-  console.log(localizedUrl)
-  // Output: 'https://example.com/en/page'
+  ```typescript
+  const spanishMessage = localizeMessage('Hello!', 'es'); // assuming translations exist
+  console.log(spanishMessage);
+  // Output: "¡Hola!"
   ```
 
-- **See also**
+- **Exceptions**
 
-  - [Documentation - Placeholder Patterns](#placeholder-patterns)
-  - [Guide - Declension with Decline()](#declension-with-decline)
+  - `Error`: - If no translation is found and fallback is disabled in the configuration.
+
+## localizeUrl <Badge type="info" text="function" /> {#localizeUrl}
+
+Localizes a URL by prepending the specified locale code to the path.
+
+- **Signature**
+
+  ```typescript
+  function localizeUrl(
+    urlString: string,
+    locale: Locale,
+    options: Partial<Config>
+  ): string
+  ```
+
+- **Parameters**
+
+  - `urlString`: The URL string to localize (optional).
+  - `locale`: The desired locale code to prepend to the path (optional).
+  - `options`: Optional configuration options (overrides defaults).
+
+- **Returns**
+
+  The localized URL or the original URL string if not applicable.
+
+- **Examples**
+
+  ```typescript
+  const localizedUrl = localizeUrl('/contact', 'es');
+  console.log(localizedUrl); // Output: /es/contact
+  ```
+
+

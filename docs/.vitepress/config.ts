@@ -6,15 +6,9 @@ export default defineConfig({
   themeConfig: {
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Docs', link: '/core/introduction' },
+      { text: 'Guide', link: '/core/guide/quickstart' },
       /* { text: 'Examples', link: '/examples' }, */
-      { text: 'Reference', link: '/core/reference/localization' },
-      {
-        text: 'Integrations',
-        items: [
-          { text: 'Vue', link: '/vue/installation' },
-        ]
-      },
+      { text: 'Reference', link: '/core/reference/configuration' },
       {
         text: 'About',
         items: [
@@ -34,51 +28,44 @@ export default defineConfig({
     sidebar: {
       '/': [
         {
-          text: 'Getting Started',
+          text: 'Overview',
           base: '/core',
           items: [
             { text: 'Introduction', link: '/introduction' },
-            { text: 'Installation', link: '/installation' },
-            { text: 'Configuration', link: '/configuration' },
-            { text: 'Usage', link: '/usage' },
           ]
         },
         {
           text: 'Guides',
           base: '/core/guide',
           items: [
-            { text: 'Localization', link: '/localization' },
+            { text: 'Quickstart', link: '/quickstart' },
+            { text: 'Installation', link: '/installation' },
+            { text: 'Configuration', link: '/configuration' },
+            /* { text: 'Localization', link: '/localization' },
             { text: 'Formatting', link: '/formatting' },
             { text: 'Detection', link: '/locale-detection' },
-            { text: 'Translation', link: '/translation' },
-            { text: 'Config', link: '/config' },
+            { text: 'Translation', link: '/translation' }, */
           ]
         },
-        {
+        /* {
           text: 'Explanations',
           items: [
             { text: 'Key Design', link: '/core/explanations/key-design' },
           ]
-        },
+        }, */
         {
           text: 'Reference',
           base: '/core/reference',
           items: [
-            { text: 'Localization API', link: '/localization' },
-            { text: 'Detection', link: '/detection' },
-            { text: 'Translation API', link: '/translation' },
-            { text: 'Config', link: '/config' },
+            { text: 'Configuration', link: '/config' },
             { text: 'Format API', link: '/format' },
-          ]
-        },
-      ],
-      '/vue/': [
-        {
-          text: 'Vue Integration',
-          base: '/vue',
-          items: [
-            { text: 'Installation', link: '/installation' },
-            { text: 'API Reference', link: '/reference' },
+            { text: 'Interpolate API', link: '/interpolation' },
+            { text: 'Resolve API', link: '/resolve' },
+            { text: 'Grammar API', link: '/grammar' },
+            { text: 'Localization API', link: '/localization' },
+            { text: 'Translation API', link: '/translation' },
+            { text: 'Detection API', link: '/detection' },
+            { text: 'Library', link: '/library' },
           ]
         },
       ],

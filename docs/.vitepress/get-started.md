@@ -1,13 +1,4 @@
-# Usage {#usage}
-
-:::info NOTE
-Before using Psitta, make sure you have:
-
-- [Installed Psitta](./installation)
-- [Initialized configuration](./configuration.md)
-:::
-
-## Import {#import}
+## Configuration {#import}
 
 First of all, import Psitta globally in your entry point file. If you're rendering on the server, import the config file there as well.
 
@@ -140,11 +131,3 @@ locale.value = 'es' // Set the new locale
 :::
 
 Replace `es` with the desired locale code, such as `en` for English or `fr` for French, based on your application's localization requirements.
-
-## What's Next? {#whats-next}
-
-Now that you've learned the basics, you can explore more advanced features based on your requirements:
-
-- Refer to the [Guides](/core/guide/localization) to learn how to accomplish specific goals and tasks with Psitta.
-- Consult the [API Reference](/core/reference/localization) for detailed documentation on Psitta's functions and methods, enabling you to leverage its full capabilities.
-- If you're curious about the API design decisions behind Psitta, delve into the [Explanations](/core/explanations/key-design.md) to gain insights into its architecture and key concepts.

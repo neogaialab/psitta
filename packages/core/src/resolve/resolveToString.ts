@@ -4,7 +4,7 @@ import { resolve, type ResolveCallback, type ResolveFunction } from './'
  * Resolves a message template into a single string with resolved placeholders.
  *
  * @param {Message} text - The message template string containing placeholders.
- * @param {Partial<Context>} [context={}] - Optional object containing values to replace placeholders.
+ * @param {Partial<Context>} [context] - Optional object containing values to replace placeholders. Defaults to `{}`.
  * @param {ResolveOptions} [options] - Optional configuration options for resolving.
  * @returns {string} The final resolved message string.
  *

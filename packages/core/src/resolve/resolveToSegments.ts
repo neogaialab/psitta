@@ -6,9 +6,9 @@ import { resolve, type ResolveCallback, type ResolveOptions, type Segment } from
  * Resolves a message template into an array of segments representing its structure.
  *
  * @param {Message} message - The message template string containing placeholders.
- * @param {Partial<Context>} [context={}] - Optional object containing values to replace placeholders.
+ * @param {Partial<Context>} [context] - Optional object containing values to replace placeholders. Defaults to `{}`.
  * @param {ResolveOptions} [options] - Optional configuration options for formatting.
- * @returns {Segment<Placeholders, Context>[]} An array of segments representing the message structure (text or placeholder information).
+ * @returns {Array<Segment<Placeholders, Context>>} An array of segments representing the message structure (text or placeholder information).
  *
  * @details
  *
