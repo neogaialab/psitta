@@ -11,7 +11,7 @@ export const DEFAULT_I18N_CONFIG: Config = {
   grammar: {
     rules: {
       en: {
-        gender: null,
+        gender: DEFAULT_GENDER_INFLECTION_RULE,
         number: DEFAULT_NUMBER_INFLECTION_RULE,
       },
       es: {
