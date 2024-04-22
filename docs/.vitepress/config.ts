@@ -3,12 +3,13 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "Psitta",
   description: "Next-gen internationalization library",
+  base: '/psitta/',
   themeConfig: {
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Guide', link: '/core/guide/quickstart' },
       /* { text: 'Examples', link: '/examples' }, */
-      { text: 'Reference', link: '/core/reference/configuration' },
+      { text: 'Reference', link: '/core/reference/config' },
       {
         text: 'About',
         items: [

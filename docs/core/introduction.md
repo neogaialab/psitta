@@ -6,7 +6,7 @@ Psitta is a modern Web internationalization framework designed to be [ESM-only](
 
 <div class="tip custom-block" style="padding-top: 8px">
 
-Want to try it out quickly? Jump to the [Quickstart](/core/quickstart).
+Want to try it out quickly? Jump to the [Quickstart](/core/guide/quickstart).
 
 </div>
 

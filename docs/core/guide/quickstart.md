@@ -198,5 +198,5 @@ const locale = useLocale() // [!code ++]
 Now that you've learned the basics, you can explore more advanced features based on your requirements:
 
 - Refer to the [Guides](/core/guide/installation) to learn how to accomplish specific goals and tasks with Psitta.
-- Consult the [API Reference](/core/reference/configuration) for detailed documentation on Psitta's functions and methods, enabling you to leverage its full capabilities.
+- Consult the [API Reference](/core/reference/config) for detailed documentation on Psitta's functions and methods, enabling you to leverage its full capabilities.
 - If you're curious about the API design decisions behind Psitta, delve into the [Explanations](/core/explanations/key-design.md) to gain insights into its architecture and key concepts.
