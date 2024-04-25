@@ -15,8 +15,8 @@ import { resolve, type ResolveCallback, type ResolveFunction } from './'
  * @example
  *
  * ```typescript
- * const formattedMessage = resolveToString('Hello, {name}!', { name: 'Batou' });
- * console.log(formattedMessage);
+ * const resolvedMessage = resolveToString('Hello, {name}!', { name: 'Batou' });
+ * console.log(resolvedMessage);
  * // Output: "Hello, Batou!"
  * ```
  */

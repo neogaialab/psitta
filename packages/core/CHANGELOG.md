@@ -19,7 +19,7 @@ description: All notable changes to this project will be documented in this file
 - Renamed `formatToSegments()` to `resolveToSegments()`
 - Merged `Text` into `Message`
 - Renamed values to context
-- Changed grammar configuration
+- Move declension configuration to `grammar` key
 
 ## Fixed
 

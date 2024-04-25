@@ -1,5 +1,69 @@
 # Resolve API {#resolve-api}
 
+## resolve <Badge type="info" text="function" /> {#resolve}
+
+Resolves a message string with placeholders, replacing them with values from the context.
+Escapes and unescapes parts of the message as needed.
+
+- **Signature**
+
+  ```typescript
+  function resolve(
+    message: Message,
+    context: Partial<Context<V>>,
+    callbackFn: ResolveCallback<I>,
+    initialValue: I,
+    options: ResolveOptions
+  ): I
+  ```
+
+- **Parameters**
+
+  - `message`: The message string with placeholders.
+  - `context`: The context object containing values to replace placeholders in the message. Default is an empty object.
+  - `callbackFn`: The callback function called for each part of the resolved message.
+  - `initialValue`: The initial value used in the callback function.
+  - `options`: Additional options for resolving the message, such as the locale.
+
+- **Returns**
+
+  The resolved message after replacing placeholders with values from the context.
+
+- **Details**
+
+  This function takes a message string with placeholders and resolves it by:
+    * Escaping special characters to prevent them from being interpreted as part of the message.
+    * Iterating through each segment of the message:
+      * Unescaping plain text segments.
+      * Identifying named placeholders (`{key}`) and extracting the key name.
+      * Looking up the value for the key in the context object.
+      * If the value is found:
+        * Applying any necessary inflections (e.g., singular/plural) based on the value and locale.
+        * Formatting the value according to the locale.
+        * Replacing the placeholder with the formatted and inflected value.
+      * If the value is not found:
+        * Leaving the placeholder intact.
+    * Unescaping any remaining escaped characters.
+    * Calling the `callbackFn` for each segment (escaped text, placeholder, or resolved value) allowing for custom processing.
+  
+  The resolved message is returned for further use.
+
+- **Examples**
+
+  ```typescript
+  const cb: ResolveCallback<string> = (c) => {
+    return c.prev + c.part
+  }
+  const resolvedMessage = resolve('Hello, {name}!', { name: 'Batou' }, cb, '');
+  console.log(resolvedMessage);
+  // Output: "Hello, Batou!"
+  ```
+
+- **See Also**
+
+  - [resolveToString](https://neogaialab.github.io/psitta/core/reference/resolve.html#resolveToString)
+  - [resolveToSegments](https://neogaialab.github.io/psitta/core/reference/resolve.html#resolveToSegments)
+
 ## resolveToSegments <Badge type="info" text="function" /> {#resolveToSegments}
 
 Resolves a message template into an array of segments representing its structure.
@@ -79,8 +143,8 @@ Resolves a message template into a single string with resolved placeholders.
 - **Examples**
 
   ```typescript
-  const formattedMessage = resolveToString('Hello, {name}!', { name: 'Batou' });
-  console.log(formattedMessage);
+  const resolvedMessage = resolveToString('Hello, {name}!', { name: 'Batou' });
+  console.log(resolvedMessage);
   // Output: "Hello, Batou!"
   ```
 

@@ -56,12 +56,4 @@ function resolveToSegments(
   return resolve(message, context, cb, [], options)
 }
 
-const segments = resolveToSegments('Hello, {name}!', { name: 'Batou' });
-console.log(segments);
-// Output: [
-//   { type: 'text', part: 'Hello, ', key: undefined, context: { name: 'Batou' }, inflect: undefined },
-//   { type: 'placeholder', part: '{name}', key: 'name', context: { name: 'Batou' }, inflect: undefined }
-//   { type: 'text', part: '!', key: undefined, context: { name: 'Batou' }, inflect: undefined }
-// ]
-
 export default resolveToSegments
